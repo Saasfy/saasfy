@@ -1,0 +1,9 @@
+# Add files here to ignore them from prettier formatting
+/dist
+/coverage
+/.nx/cache
+
+supabase/.branches
+supabase/.temp
+
+apps/web/.next

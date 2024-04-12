@@ -1,0 +1,37 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@saasfy/api": ["packages/api/src/index.ts"],
+      "@saasfy/api/server": ["packages/api/src/server.ts"],
+      "@saasfy/components": ["packages/components/src/index.ts"],
+      "@saasfy/components/server": ["packages/components/src/server.ts"],
+      "@saasfy/prisma": ["packages/prisma/src/index.ts"],
+      "@saasfy/prisma/server": ["packages/prisma/src/server.ts"],
+      "@saasfy/resend": ["packages/resend/src/index.ts"],
+      "@saasfy/resend/server": ["packages/resend/src/server.ts"],
+      "@saasfy/stripe": ["packages/stripe/src/index.ts"],
+      "@saasfy/stripe/server": ["packages/stripe/src/server.ts"],
+      "@saasfy/supabase": ["packages/supabase/src/index.ts"],
+      "@saasfy/supabase/server": ["packages/supabase/src/server.ts"],
+      "@saasfy/ui/*": ["packages/ui/*"],
+      "@saasfy/ui/server": ["packages/ui/src/server.ts"],
+      "@saasfy/utils": ["packages/utils/src/index.ts"],
+      "@saasfy/utils/server": ["packages/utils/src/server.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
