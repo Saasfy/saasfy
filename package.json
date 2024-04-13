@@ -6,7 +6,8 @@
   "scripts": {
     "db:gen:types": "supabase gen types typescript --local > packages/supabase/src/lib/db-types.ts",
     "db:push": "prisma db push && prisma generate && npm run db:gen:types",
-    "stripe:webhook": "stripe listen --forward-to localhost:3000/api/webhooks/stripe"
+    "stripe:webhook": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
+    "build": "npm run db:push && nx build web"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
