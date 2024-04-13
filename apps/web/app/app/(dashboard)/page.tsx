@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { Button } from '@saasfy/ui/button';
-import { createClient, getUser } from '@saasfy/supabase/server';
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 import { Badge } from '@saasfy/ui/badge';
 import { CreateWorkspaceSheet } from '@saasfy/components';
@@ -14,10 +14,10 @@ export default async function Component() {
     return redirect('/signin');
   }
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
   const { data: workspaces } = await supabase
-    .from('Workspace')
-    .select('*, Project(id), Domain(id), WorkspaceUser(id), Plan(name)')
+    .from('workspaces')
+    .select('*, projects(id), domains(id), workspace_users(id), plans(name)')
     .limit(8);
 
   return (
@@ -49,13 +49,18 @@ export default async function Component() {
                 <TableRow key={workspace.id}>
                   <TableCell className="font-medium">{workspace.name}</TableCell>
                   <TableCell className="hidden md:table-cell">
-                    <Badge className="capitalize" variant={workspace.status === 'active' ? 'default' : 'destructive'}>
+                    <Badge
+                      className="capitalize"
+                      variant={workspace.status === 'active' ? 'default' : 'destructive'}
+                    >
                       {workspace.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>{workspace.Plan?.name}</TableCell>
-                  <TableCell>{workspace.Project?.length}</TableCell>
-                  <TableCell className="hidden md:table-cell">{workspace.Domain?.length}</TableCell>
+                  <TableCell>{workspace.plans?.name}</TableCell>
+                  <TableCell>{workspace.projects?.length}</TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {workspace.domains?.length}
+                  </TableCell>
                   <TableCell className="w-36">
                     <Button size="sm" variant="outline" asChild>
                       <Link href={`/${workspace.slug}`}>

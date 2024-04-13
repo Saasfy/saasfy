@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
-import { createClient, getUser } from '@saasfy/supabase/server';
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
 import { redirect } from 'next/navigation';
 import { CreateProjectSheet } from '@saasfy/components';
@@ -14,19 +14,21 @@ export default async function Component({ params }: { params: { workspaceSlug: s
     return redirect('/signin');
   }
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
-  const workspace = (await supabase.from('Workspace').select('*').eq('slug', params.workspaceSlug))?.data?.at(0);
+  const workspace = (
+    await supabase.from('workspaces').select('*').eq('slug', params.workspaceSlug)
+  )?.data?.at(0);
 
   if (!workspace) {
     return redirect('/not-found');
   }
 
   const { data: projects = [] } = (await supabase
-    .from('Project')
-    .select('*, Workspace(*)')
+    .from('projects')
+    .select('*, workspaces(*)')
     .limit(10)
-    .eq('workspaceSlug', params.workspaceSlug)) ?? { data: [] };
+    .eq('workspace_id', workspace.id)) ?? { data: [] };
 
   return (
     <>
@@ -77,7 +79,9 @@ export default async function Component({ params }: { params: { workspaceSlug: s
         <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">You have no projects yet.</h3>
-            <p className="text-sm text-muted-foreground">You can create a project to get started.</p>
+            <p className="text-sm text-muted-foreground">
+              You can create a project to get started.
+            </p>
             {/*<CreatePlanSheet asChild>*/}
             {/*<Button className="mt-4" asChild>*/}
             {/*  <Link href="/plans/new">Add Plan</Link>*/}

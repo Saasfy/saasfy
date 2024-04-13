@@ -14,7 +14,9 @@ export default function Component() {
       <Card>
         <CardHeader className={'justify-center items-center'}>
           <CheckIcon className="w-16 h-16 text-green-500" />
-          <h2 className="mt-4 text-3xl font-extrabold text-gray-900 dark:text-gray-100">Payment Successful!</h2>
+          <h2 className="mt-4 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
+            Payment Successful!
+          </h2>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col items-center justify-center">

@@ -5,7 +5,12 @@ import { Check, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
 import { Button } from '@saasfy/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@saasfy/ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@saasfy/ui/dropdown-menu';
 import { cn } from '@saasfy/utils';
 
 export function ThemeModeToggle() {

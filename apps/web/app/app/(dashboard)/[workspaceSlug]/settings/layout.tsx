@@ -1,11 +1,7 @@
 import { ReactNode } from 'react';
-import Link from 'next/link';
-import { ArrowUpRightIcon } from 'lucide-react';
-import { prisma } from '@saasfy/prisma/server';
-import { WorkspaceStatus } from '@prisma/client';
 import { redirect } from 'next/navigation';
-import { Button } from '@saasfy/ui/button';
 import { Nav } from './nav';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export default async function SettingsLayout({
   children,
@@ -14,18 +10,13 @@ export default async function SettingsLayout({
   children: ReactNode;
   params: { workspaceSlug: string };
 }) {
-  const workspace = await prisma.workspace.findUnique({
-    where: {
-      slug: params.workspaceSlug,
-    },
-    include: {
-      plan: {
-        include: {
-          prices: true,
-        },
-      },
-    },
-  });
+  const supabase = createAdminClient();
+
+  const { data: workspace } = await supabase
+    .from('workspaces')
+    .select('*')
+    .eq('slug', params.workspaceSlug)
+    .single();
 
   if (!workspace) {
     return redirect('/not-found');

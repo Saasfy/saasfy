@@ -1,21 +1,14 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
 import slugify from 'slugify';
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient, createClient } from '@saasfy/supabase/server';
 import { revalidatePath } from 'next/cache';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { z, ZodError } from 'zod';
-import { prisma } from '@saasfy/prisma/server';
 
 const CreateWorkspaceSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   description: z.string(),
 });
-
-function isPrismaError(error: any): error is PrismaClientKnownRequestError {
-  return error.code === 'P2002';
-}
 
 export async function createWorkspace(formData: FormData) {
   const supabase = createClient();
@@ -43,33 +36,28 @@ export async function createWorkspace(formData: FormData) {
   }
 
   try {
-    const workspace = await prisma.workspace.create({
-      data: {
-        ...data,
+    const supabase = createAdminClient();
+
+    const { data: workspace } = await supabase
+      .from('workspaces')
+      .insert({
+        name: data.name,
+        description: data.description,
         slug: slugify(data.name, { lower: true, trim: true }),
-        users: {
-          create: {
-            role: 'owner',
-            user: {
-              connect: {
-                id: user.id,
-              },
-            },
-          },
-        },
-      },
+      })
+      .select('*')
+      .single();
+
+    await supabase.from('workspace_users').insert({
+      role: 'owner',
+      user_id: user.id,
+      workspace_id: workspace!.id,
     });
 
     revalidatePath(`/`);
 
     return workspace;
   } catch (error) {
-    if (isPrismaError(error)) {
-      return {
-        errors: ['A workspace with that name already exists'],
-      };
-    }
-
     return {
       errors: [(error as any)?.message ?? 'An error occurred'],
     };

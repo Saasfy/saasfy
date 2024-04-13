@@ -1,22 +1,15 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient, createClient } from '@saasfy/supabase/server';
 import { revalidatePath } from 'next/cache';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { z, ZodError } from 'zod';
 import slugify from 'slugify';
-import { prisma } from '@saasfy/prisma/server';
 
 const CreateProjectSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   description: z.string().optional(),
   workspaceSlug: z.string(),
 });
-
-function isPrismaError(error: any): error is PrismaClientKnownRequestError {
-  return error.code === 'P2002';
-}
 
 export async function createProject(formData: FormData) {
   const supabase = createClient();
@@ -47,28 +40,36 @@ export async function createProject(formData: FormData) {
   const { workspaceSlug, ...project } = data;
 
   try {
-    const createProject = await prisma.project.create({
-      data: {
-        ...project,
+    const supabase = createAdminClient();
+
+    const { data: workspace } = await supabase
+      .from('workspaces')
+      .select('*, workspace_users(*)')
+      .eq('slug', workspaceSlug)
+      .eq('workspace_users.user_id', user.id)
+      .single();
+
+    if (!workspace) {
+      return {
+        errors: ['You do not have permission to access this source'],
+      };
+    }
+
+    const { data: createProject } = await supabase
+      .from('projects')
+      .insert({
+        name: data.name,
+        description: data.description,
         slug: slugify(data.name, { lower: true }),
-        workspace: {
-          connect: {
-            slug: workspaceSlug,
-          },
-        },
-      },
-    });
+        workspace_id: workspace.id,
+      })
+      .select('*')
+      .single();
 
     revalidatePath(`/`);
 
     return createProject;
   } catch (error) {
-    if (isPrismaError(error)) {
-      return {
-        errors: ['A project with that name already exists'],
-      };
-    }
-
     return {
       errors: [(error as any)?.message ?? 'An error occurred'],
     };

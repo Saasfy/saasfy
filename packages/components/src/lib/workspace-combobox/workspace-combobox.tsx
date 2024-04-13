@@ -18,7 +18,11 @@ import {
 import { cn } from '@saasfy/utils';
 import { CreateWorkspaceSheet } from '../create-workspace/create-workspace-sheet';
 
-export function WorkspaceCombobox({ workspaces = [] }: { workspaces?: Tables<'Workspace'>[] | null }) {
+export function WorkspaceCombobox({
+  workspaces = [],
+}: {
+  workspaces?: Tables<'workspaces'>[] | null;
+}) {
   const { workspaceSlug: slug } = useParams();
   const router = useRouter();
 
@@ -27,8 +31,15 @@ export function WorkspaceCombobox({ workspaces = [] }: { workspaces?: Tables<'Wo
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
-          {slug ? workspaces?.find((workspace) => workspace.slug === slug)?.name : 'Select workspace...'}
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-[200px] justify-between"
+        >
+          {slug
+            ? workspaces?.find((workspace) => workspace.slug === slug)?.name
+            : 'Select workspace...'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -46,7 +57,12 @@ export function WorkspaceCombobox({ workspaces = [] }: { workspaces?: Tables<'Wo
                     router.push(`/${currentValue}`);
                   }}
                 >
-                  <Check className={cn('mr-2 h-4 w-4', slug === workspace.slug ? 'opacity-100' : 'opacity-0')} />
+                  <Check
+                    className={cn(
+                      'mr-2 h-4 w-4',
+                      slug === workspace.slug ? 'opacity-100' : 'opacity-0',
+                    )}
+                  />
                   {workspace.name}
                 </CommandItem>
               ))}

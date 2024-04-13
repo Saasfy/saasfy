@@ -1,8 +1,7 @@
 import { stripe } from '@saasfy/stripe/server';
 import { z } from 'zod';
 import { getUrl, withWorkspaceAdmin } from '@saasfy/api/server';
-import { prisma } from '@saasfy/prisma/server';
-import { PlanStatus, PriceStatus } from '@prisma/client';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 const FormData = z.object({
   priceId: z.string(),
@@ -18,26 +17,24 @@ export const POST = withWorkspaceAdmin(async ({ req, user, workspace }) => {
   });
 
   if (!parsedData.success) {
-    return Response.json({ errors: parsedData.error.errors.map((err) => err.message) }, { status: 400 });
+    return Response.json(
+      { errors: parsedData.error.errors.map((err) => err.message) },
+      { status: 400 },
+    );
   }
 
   const { data } = parsedData;
 
-  const plan = await prisma.plan.findFirst({
-    where: {
-      id: data.planId,
-      status: PlanStatus.active,
-      prices: {
-        every: {
-          id: data.priceId,
-          status: PriceStatus.active,
-        },
-      },
-    },
-    include: {
-      prices: true,
-    },
-  });
+  const supabase = createAdminClient();
+
+  const { data: plan } = await supabase
+    .from('plans')
+    .select('*, prices(*)')
+    .eq('id', data.planId)
+    .eq('status', 'active')
+    .eq('prices.status', 'active')
+    .eq('prices.id', data.priceId)
+    .single();
 
   if (!plan || !plan.prices || plan.prices.length === 0) {
     return Response.redirect(getUrl(req, `${workspace.slug}/settings/upgrade`).toString(), 303);
@@ -56,7 +53,7 @@ export const POST = withWorkspaceAdmin(async ({ req, user, workspace }) => {
     },
     line_items: [
       {
-        price: plan.prices.at(0)!.stripePriceId!,
+        price: plan.prices.at(0)!.stripe_price_id!,
         quantity: 1,
       },
     ],

@@ -1,27 +1,21 @@
 import { withAdmin } from '@saasfy/api/server';
-import { prisma } from '@saasfy/prisma/server';
 import { stripe } from '@saasfy/stripe/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export const DELETE = withAdmin<{ id: string }>(async ({ req, params }) => {
   const id = params.id;
 
-  const plan = await prisma.plan.findUnique({
-    where: {
-      id,
-    },
-  });
+  const supabase = createAdminClient();
+
+  const { data: plan } = await supabase.from('plans').select('*').eq('id', id).single();
 
   if (!plan) {
     return Response.json({ error: 'Plan not found' }, { status: 404 });
   }
 
-  plan.stripeProductId && (await stripe.products.del(plan.stripeProductId));
+  plan.stripe_product_id && (await stripe.products.del(plan.stripe_product_id));
 
-  await prisma.plan.delete({
-    where: {
-      id,
-    },
-  });
+  await supabase.from('plans').delete().eq('id', id);
 
   return Response.json({ success: true });
 });

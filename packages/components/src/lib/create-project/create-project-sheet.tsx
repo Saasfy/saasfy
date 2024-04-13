@@ -27,7 +27,7 @@ export function CreateProjectSheet({
   children: React.ReactNode;
   asChild?: boolean;
   className?: string;
-  workspace: Tables<'Workspace'> | null | undefined;
+  workspace: Tables<'workspaces'> | null | undefined;
 }) {
   const { toast } = useToast();
   const router = useRouter();
@@ -60,13 +60,17 @@ export function CreateProjectSheet({
                 try {
                   const response = await createProject(formData);
 
-                  if ('errors' in response) {
+                  if (!response || (response && 'errors' in response)) {
                     toast({
                       title: 'Uh oh! Something went wrong.',
-                      description: response.errors.join('. '),
+                      description:
+                        response?.errors.join('. ') || 'There was a problem with your request.',
                       variant: 'destructive',
                       action: (
-                        <ToastAction altText="Try again" onClick={() => createProjectFormAction(formData)}>
+                        <ToastAction
+                          altText="Try again"
+                          onClick={() => createProjectFormAction(formData)}
+                        >
                           Try again
                         </ToastAction>
                       ),
@@ -92,7 +96,10 @@ export function CreateProjectSheet({
                     title: 'Uh oh! Something went wrong.',
                     description: 'There was a problem with your request.',
                     action: (
-                      <ToastAction altText="Try again" onClick={() => createProjectFormAction(formData)}>
+                      <ToastAction
+                        altText="Try again"
+                        onClick={() => createProjectFormAction(formData)}
+                      >
                         Try again
                       </ToastAction>
                     ),

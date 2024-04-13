@@ -75,7 +75,8 @@ export const getStatusRedirect = (
   statusDescription = '',
   disableButton = false,
   arbitraryParams = '',
-) => getToastRedirect(path, 'status', statusName, statusDescription, disableButton, arbitraryParams);
+) =>
+  getToastRedirect(path, 'status', statusName, statusDescription, disableButton, arbitraryParams);
 
 export const getErrorRedirect = (
   path: string,

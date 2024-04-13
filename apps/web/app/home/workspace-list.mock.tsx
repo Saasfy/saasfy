@@ -36,19 +36,19 @@ import {
 import { cn } from '@saasfy/utils';
 
 export function WorkspaceListMock() {
-  const workspaces: Tables<'Workspace'>[] = [
+  const workspaces: Tables<'workspaces'>[] = [
     {
       id: '1',
       name: 'Workspace 1',
       slug: 'workspace-1',
       description: 'Workspace 1 description',
       status: 'active',
-      createdAt: new Date().toISOString(),
-      planId: null,
-      customerId: null,
-      subscriptionId: null,
-      subscriptionStatus: null,
-      updatedAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      plan_id: null,
+      stripe_customer_id: null,
+      stripe_subscription_id: null,
+      stripe_subscription_status: null,
+      updated_at: new Date().toISOString(),
     },
     {
       id: '2',
@@ -56,12 +56,12 @@ export function WorkspaceListMock() {
       slug: 'workspace-2',
       description: 'Workspace 2 description',
       status: 'inactive',
-      createdAt: new Date().toISOString(),
-      planId: null,
-      customerId: null,
-      subscriptionId: null,
-      subscriptionStatus: null,
-      updatedAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      plan_id: null,
+      stripe_customer_id: null,
+      stripe_subscription_id: null,
+      stripe_subscription_status: null,
+      updated_at: new Date().toISOString(),
     },
     {
       id: '3',
@@ -69,12 +69,12 @@ export function WorkspaceListMock() {
       slug: 'workspace-3',
       description: 'Workspace 3 description',
       status: 'active',
-      createdAt: new Date().toISOString(),
-      planId: null,
-      customerId: null,
-      subscriptionId: null,
-      subscriptionStatus: null,
-      updatedAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      plan_id: null,
+      stripe_customer_id: null,
+      stripe_subscription_id: null,
+      stripe_subscription_status: null,
+      updated_at: new Date().toISOString(),
     },
   ];
 
@@ -93,7 +93,9 @@ export function WorkspaceListMock() {
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" role="combobox" className="w-[200px] justify-between">
-                  {slug ? workspaces?.find((workspace) => workspace.slug === slug)?.name : 'Select workspace...'}
+                  {slug
+                    ? workspaces?.find((workspace) => workspace.slug === slug)?.name
+                    : 'Select workspace...'}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
@@ -106,7 +108,10 @@ export function WorkspaceListMock() {
                       {workspaces?.map((workspace) => (
                         <CommandItem key={workspace.slug} value={workspace.slug}>
                           <Check
-                            className={cn('mr-2 h-4 w-4', slug === workspace.slug ? 'opacity-100' : 'opacity-0')}
+                            className={cn(
+                              'mr-2 h-4 w-4',
+                              slug === workspace.slug ? 'opacity-100' : 'opacity-0',
+                            )}
                           />
                           {workspace.name}
                         </CommandItem>
@@ -128,7 +133,11 @@ export function WorkspaceListMock() {
             <form className="ml-auto flex-1 sm:flex-initial">
               <div className="relative">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]" placeholder="Search..." type="search" />
+                <Input
+                  className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                  placeholder="Search..."
+                  type="search"
+                />
               </div>
             </form>
             <DropdownMenu>
@@ -184,7 +193,9 @@ export function WorkspaceListMock() {
                         </Badge>
                       </TableCell>
                       <TableCell>{Math.floor(Math.random() * 100)}</TableCell>
-                      <TableCell className="hidden md:table-cell">{Math.floor(Math.random() * 100)}</TableCell>
+                      <TableCell className="hidden md:table-cell">
+                        {Math.floor(Math.random() * 100)}
+                      </TableCell>
                       <TableCell className="w-36">
                         <Button size="sm" variant="outline" asChild>
                           <Link href={`#`}>

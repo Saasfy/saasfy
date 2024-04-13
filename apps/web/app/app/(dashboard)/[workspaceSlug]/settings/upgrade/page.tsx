@@ -1,17 +1,15 @@
-import { prisma } from '@saasfy/prisma/server';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
 import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export default async function Upgrade({ params }: { params: { workspaceSlug: string } }) {
-  const plans = await prisma.plan.findMany({
-    where: {
-      status: 'active',
-    },
-    include: {
-      prices: true,
-    },
-  });
+  const supabase = createAdminClient();
+
+  const { data: plans } = await supabase
+    .from('plans')
+    .select('*, prices(*)')
+    .eq('status', 'active');
 
   return (
     <>
@@ -20,7 +18,7 @@ export default async function Upgrade({ params }: { params: { workspaceSlug: str
         We offer different plans to meet your needs. Choose the one that suits you best.
       </p>
       <div className="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-3 w-full max-w-6xl">
-        {plans.map((plan) => (
+        {plans?.map((plan) => (
           <Card key={plan.id}>
             <CardHeader>
               <CardTitle>{plan.name}</CardTitle>
@@ -35,7 +33,10 @@ export default async function Upgrade({ params }: { params: { workspaceSlug: str
                   ${price.amount / 100}/{price.interval}
                 </div>
               ))}
-              <form action={`/api/workspaces/${params.workspaceSlug}/subscription/checkout`} method="post">
+              <form
+                action={`/api/workspaces/${params.workspaceSlug}/subscription/checkout`}
+                method="post"
+              >
                 <input type="hidden" name="planId" value={plan.id} />
                 <input type="hidden" name="priceId" value={plan.prices.at(0)?.id} />
                 <Button className="w-full">Choose Plan</Button>

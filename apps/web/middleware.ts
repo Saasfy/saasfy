@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { createClient, updateSession } from '@saasfy/supabase/server';
+import { updateSession } from '@saasfy/supabase/server';
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl;
@@ -10,9 +10,7 @@ export async function middleware(request: NextRequest) {
 
   const searchParams = request.nextUrl.searchParams.toString();
   // Get the pathname of the request (e.g. /, /about, /blog/first-post)
-  const path = `${url.pathname}${
-    searchParams.length > 0 ? `?${searchParams}` : ''
-  }`;
+  const path = `${url.pathname}${searchParams.length > 0 ? `?${searchParams}` : ''}`;
 
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
@@ -24,13 +22,8 @@ export async function middleware(request: NextRequest) {
   }
 
   // rewrite root application to `/home` folder
-  if (
-    hostname === 'localhost:3000' ||
-    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
-  ) {
-    return NextResponse.rewrite(
-      new URL(`/home${path === '/' ? '' : path}`, request.url),
-    );
+  if (hostname === 'localhost:3000' || hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN) {
+    return NextResponse.rewrite(new URL(`/home${path === '/' ? '' : path}`, request.url));
   }
 
   // rewrite everything else to `/[domain]/[slug] dynamic route

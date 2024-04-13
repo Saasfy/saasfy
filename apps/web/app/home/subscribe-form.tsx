@@ -11,7 +11,12 @@ export function SubscribeForm() {
   return (
     <>
       <form className="flex space-x-2">
-        <Input className="max-w-lg flex-1" placeholder="Enter your email" type="email" name="email" />
+        <Input
+          className="max-w-lg flex-1"
+          placeholder="Enter your email"
+          type="email"
+          name="email"
+        />
         <Button
           type="submit"
           formAction={async (formData) => {

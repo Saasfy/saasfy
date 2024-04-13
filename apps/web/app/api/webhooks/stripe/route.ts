@@ -1,9 +1,8 @@
 import { stripe } from '@saasfy/stripe/server';
 import Stripe from 'stripe';
-import { createAdminClient, createClient } from '@saasfy/supabase/server';
-import { Role, WorkspaceStatus } from '@prisma/client';
+import { createAdminClient } from '@saasfy/supabase/server';
 import { v4 as uuidv4 } from 'uuid';
-import { prisma } from '@saasfy/prisma/server';
+import { Client } from 'pg';
 
 export async function POST(req: Request) {
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
@@ -16,7 +15,10 @@ export async function POST(req: Request) {
   const event = safeDecodeEvent(body, sig!, endpointSecret);
 
   if (!event) {
-    return Response.json({ error: 'Stripe webhook signature verification failed' }, { status: 400 });
+    return Response.json(
+      { error: 'Stripe webhook signature verification failed' },
+      { status: 400 },
+    );
   }
 
   switch (event?.type) {
@@ -54,15 +56,16 @@ function safeDecodeEvent(body: string, sig: string, endpointSecret: string) {
 }
 
 async function updateSubscriptionStatus(subscription: Stripe.Subscription) {
-  const customerId = typeof subscription.customer === 'string' ? subscription.customer : subscription.customer.id;
+  const customerId =
+    typeof subscription.customer === 'string' ? subscription.customer : subscription.customer.id;
 
-  await createClient()
-    .from('Workspace')
+  await createAdminClient()
+    .from('workspaces')
     .update({
-      subscriptionStatus: subscription.status,
+      stripe_subscription_status: subscription.status,
       status: subscription.status === 'active' ? 'active' : 'inactive',
     })
-    .eq('customerId', customerId);
+    .eq('stripe_customer_id', customerId);
 }
 
 async function createSubscription(subscription: Stripe.Subscription) {
@@ -77,11 +80,21 @@ async function createSubscription(subscription: Stripe.Subscription) {
     return Response.json({ received: true });
   }
 
-  const user = await prisma.users.findFirst({
-    where: {
-      email: customer.email,
-    },
+  const client = new Client({
+    connectionString: process.env.POSTGRES_URL,
   });
+
+  await client.connect();
+
+  const { rows } = await client.query(
+    `SELECT *
+     FROM auth.users
+     WHERE email = '${customer.email}' LIMIT 1`,
+  );
+
+  await client.end();
+
+  const user = rows.at(0)!;
 
   let userId = user?.id;
 
@@ -105,76 +118,73 @@ async function createSubscription(subscription: Stripe.Subscription) {
   }
 
   if (!workspaceId) {
-    await prisma.workspace.create({
-      data: {
+    const { data: newWorkspace } = await createAdminClient()
+      .from('workspaces')
+      .insert({
         name: 'Saasfy Workspace',
         slug: uuidv4(),
-        status: WorkspaceStatus.active,
-        customerId: customer.id,
-        subscriptionStatus: subscription.status,
-        subscriptionId: subscription.id,
-        users: {
-          create: {
-            userId,
-            role: Role.owner,
-          },
-        },
-        plan: {
-          connect: {
-            id: planId,
-          },
-        },
-      },
-    });
+        status: 'active',
+        stripe_customer_id: customer.id,
+        stripe_subscription_status: subscription.status,
+        stripe_subscription_id: subscription.id,
+        plan_id: planId,
+      })
+      .select('id')
+      .single();
+
+    await createAdminClient()
+      .from('workspace_users')
+      .insert({
+        workspace_id: newWorkspace!.id,
+        user_id: userId as unknown as string,
+        role: 'owner',
+      });
   } else {
-    await prisma.workspace.update({
-      where: {
-        id: workspaceId,
-        users: {
-          every: {
-            userId,
-            role: Role.owner,
-          },
-        },
-      },
-      data: {
-        subscriptionStatus: subscription.status,
-        subscriptionId: subscription.id,
-        customerId: customer.id,
-        status: WorkspaceStatus.active,
-        plan: {
-          connect: {
-            id: planId,
-          },
-        },
-      },
-    });
+    await createAdminClient()
+      .from('workspaces')
+      .update({
+        status: 'active',
+        stripe_customer_id: customer.id,
+        stripe_subscription_status: subscription.status,
+        stripe_subscription_id: subscription.id,
+        plan_id: planId,
+      })
+      .eq('id', workspaceId)
+      .eq('users.role', 'owner')
+      .eq('users.user_id', userId as unknown as string);
   }
 }
 
 async function checkPriceChange(subscription: Stripe.Subscription) {
   const priceId = subscription.items.data[0].price.id;
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
-  const { data: price } = await supabase.from('Price').select('id, Plan(id)').eq('stripePriceId', priceId).single();
+  const { data: price } = await supabase
+    .from('prices')
+    .select('id, plans(id)')
+    .eq('stripe_price_id', priceId)
+    .single();
 
   if (!price) {
     console.error('Plan not found');
     return;
   }
 
-  await supabase.from('Workspace').update({ planId: price.Plan!.id }).eq('subscriptionId', subscription.id);
+  await supabase
+    .from('workspaces')
+    .update({ plan_id: price.plans!.id })
+    .eq('stripe_subscription_id', subscription.id);
 }
 
 async function deleteSubscription(subscription: Stripe.Subscription) {
-  await createClient()
-    .from('Workspace')
+  await createAdminClient()
+    .from('workspaces')
     .update({
       status: 'inactive',
-      planId: null,
-      subscriptionId: null,
-      subscriptionStatus: 'canceled',
-      customerId: null,
+      plan_id: null,
+      stripe_subscription_id: null,
+      stripe_subscription_status: 'canceled',
+      stripe_customer_id: null,
     })
-    .eq('subscriptionId', subscription.id);
+    .eq('stripe_subscription_id', subscription.id);
 }

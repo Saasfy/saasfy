@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { CloudyIcon, SearchIcon, UserCircleIcon } from 'lucide-react';
 import { Input } from '@saasfy/ui/input';
 import { Button } from '@saasfy/ui/button';
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 import { AccountMenu, ThemeModeToggle, WorkspaceCombobox } from '@saasfy/components';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
-  const { data: workspaces } = await supabase.from('Workspace').select('*');
+  const { data: workspaces } = await supabase.from('workspaces').select('*');
 
   return (
     <div>
@@ -27,7 +27,11 @@ export default async function DashboardLayout({ children }: { children: ReactNod
             <form className="ml-auto flex-1 sm:flex-initial">
               <div className="relative">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]" placeholder="Search..." type="search" />
+                <Input
+                  className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+                  placeholder="Search..."
+                  type="search"
+                />
               </div>
             </form>
             <AccountMenu>

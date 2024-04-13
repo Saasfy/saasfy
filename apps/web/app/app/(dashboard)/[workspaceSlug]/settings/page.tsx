@@ -1,5 +1,12 @@
 import { Button } from '@saasfy/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@saasfy/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@saasfy/ui/card';
 import { Input } from '@saasfy/ui/input';
 
 export default function Settings() {

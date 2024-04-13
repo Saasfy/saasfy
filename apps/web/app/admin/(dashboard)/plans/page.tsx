@@ -1,14 +1,17 @@
 import { Button } from '@saasfy/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 import React from 'react';
 import Link from 'next/link';
 import { DeletePlanButton } from './_components/delete-plan-button';
 
 export default async function Component() {
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
-  const { data: plans } = await supabase.from('Plan').select('*, Price(*)').eq('Price.status', 'active');
+  const { data: plans } = await supabase
+    .from('plans')
+    .select('*, prices(*)')
+    .eq('prices.status', 'active');
 
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
@@ -38,7 +41,7 @@ export default async function Component() {
                   <TableCell className="font-medium">{plan.name}</TableCell>
                   <TableCell>{plan.description || 'No description'}</TableCell>
                   <TableCell className="hidden md:table-cell">
-                    {plan.Price.map((price) => (
+                    {plan.prices.map((price) => (
                       <div key={price.id}>
                         {price.interval === 'month' ? 'Monthly' : 'Yearly'}: ${price.amount / 100}
                       </div>
@@ -67,7 +70,9 @@ export default async function Component() {
         <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">You have no plans yet.</h3>
-            <p className="text-sm text-muted-foreground">You can start selling as soon as you add a plan.</p>
+            <p className="text-sm text-muted-foreground">
+              You can start selling as soon as you add a plan.
+            </p>
             {/*<CreatePlanSheet asChild>*/}
             <Button className="mt-4" asChild>
               <Link href="/plans/new">Add Plan</Link>

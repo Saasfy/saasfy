@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { type Workspace } from '@prisma/client';
 import { ArrowUpRightIcon } from 'lucide-react';
 import { Button } from '@saasfy/ui/button';
 import { usePathname } from 'next/navigation';
 import { cn } from '@saasfy/utils';
+import { Tables } from '@saasfy/supabase';
 
-export function Nav({ workspace }: { workspace: Workspace }) {
+export function Nav({ workspace }: { workspace: Tables<'workspaces'> }) {
   const path = usePathname();
 
   return (
@@ -26,7 +26,9 @@ export function Nav({ workspace }: { workspace: Workspace }) {
       </Link>
       <Link
         href={`/${workspace.slug}/settings/notifications`}
-        className={cn(path === `/${workspace.slug}/settings/notifications` ? 'text-foreground' : '')}
+        className={cn(
+          path === `/${workspace.slug}/settings/notifications` ? 'text-foreground' : '',
+        )}
       >
         Notifications
       </Link>

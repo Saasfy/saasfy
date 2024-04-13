@@ -24,7 +24,10 @@ export function createClient() {
   );
 }
 
-export function createAuthClient({ response, readonly = false }: { response?: NextResponse; readonly?: boolean } = {}) {
+export function createAuthClient({
+  response,
+  readonly = false,
+}: { response?: NextResponse; readonly?: boolean } = {}) {
   const cookieStore = cookies();
 
   return createServerClient<Database>(

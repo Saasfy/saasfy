@@ -1,10 +1,10 @@
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 import { redirect } from 'next/navigation';
 
 export default async function ProjectPage({ params }: { params: { project: string } }) {
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
-  const { data: projects } = await supabase.from('Project').select('*').eq('slug', params.project);
+  const { data: projects } = await supabase.from('projects').select('*').eq('slug', params.project);
 
   if (!projects?.length) {
     return redirect('/not-found');

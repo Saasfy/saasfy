@@ -4,7 +4,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
 import { ChevronLeft, PlusCircle } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@saasfy/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@saasfy/ui/card';
 import { Input } from '@saasfy/ui/input';
 import { Textarea } from '@saasfy/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
@@ -34,7 +41,13 @@ export type CreatePlanFormValues = {
   }>;
 };
 
-export function CreatePlanForm({ defaultValues, id }: { defaultValues?: CreatePlanFormValues; id?: string }) {
+export function CreatePlanForm({
+  defaultValues,
+  id,
+}: {
+  defaultValues?: CreatePlanFormValues;
+  id?: string;
+}) {
   const form = useForm<CreatePlanFormValues>({
     defaultValues: defaultValues ?? {
       description: '',
@@ -103,7 +116,7 @@ export function CreatePlanForm({ defaultValues, id }: { defaultValues?: CreatePl
       description: 'Plan updated successfully',
     });
 
-    router.push(`/plans/${data.id}`);
+    router.push(`/plans/${data!.id}`);
   }
 
   async function onSubmit(form: any) {
@@ -141,7 +154,9 @@ export function CreatePlanForm({ defaultValues, id }: { defaultValues?: CreatePl
                   <Card x-chunk="dashboard-07-chunk-0">
                     <CardHeader>
                       <CardTitle>Plan Details</CardTitle>
-                      <CardDescription>Please provide the following details to create a new plan.</CardDescription>
+                      <CardDescription>
+                        Please provide the following details to create a new plan.
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="grid gap-6">
@@ -259,7 +274,13 @@ export function CreatePlanForm({ defaultValues, id }: { defaultValues?: CreatePl
                                     <FormItem>
                                       <FormLabel className="sr-only">Price</FormLabel>
                                       <FormControl>
-                                        <Input type="number" {...field} required min={0} step="0.01" />
+                                        <Input
+                                          type="number"
+                                          {...field}
+                                          required
+                                          min={0}
+                                          step="0.01"
+                                        />
                                       </FormControl>
                                     </FormItem>
                                   )}
@@ -300,7 +321,9 @@ export function CreatePlanForm({ defaultValues, id }: { defaultValues?: CreatePl
                                           checked={field.value === 'active'}
                                           defaultChecked={field.value === 'active'}
                                           onCheckedChange={(checked) => {
-                                            field.onChange({ target: { value: checked ? 'active' : 'inactive' } });
+                                            field.onChange({
+                                              target: { value: checked ? 'active' : 'inactive' },
+                                            });
                                           }}
                                         />
                                       </FormControl>
@@ -375,8 +398,8 @@ export function CreatePlanForm({ defaultValues, id }: { defaultValues?: CreatePl
                     <CardHeader>
                       <CardTitle>Parameters</CardTitle>
                       <CardDescription>
-                        Define the parameters for the plan. These parameters will be used to limit the usage of the
-                        plan.
+                        Define the parameters for the plan. These parameters will be used to limit
+                        the usage of the plan.
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">

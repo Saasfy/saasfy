@@ -11,7 +11,7 @@ import { AdminPlansMock } from './admin-plans.mock';
 import { Badge } from '@saasfy/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@saasfy/ui/tooltip';
 import { SubscribeForm } from './subscribe-form';
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export default function Component() {
   return (
@@ -23,13 +23,22 @@ export default function Component() {
             <span className="sr-only">Saasfy</span>
           </Link>
           <nav className="flex gap-4 sm:gap-6 ml-4">
-            <Link className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60" href="#pages">
+            <Link
+              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              href="#pages"
+            >
               Pages
             </Link>
-            <Link className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60" href="#pricing">
+            <Link
+              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              href="#pricing"
+            >
               Pricing
             </Link>
-            <Link className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60" href="#faq">
+            <Link
+              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              href="#faq"
+            >
               FAQ
             </Link>
             <Link
@@ -57,8 +66,8 @@ export default function Component() {
                   Build your own SaaS
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Buy our template and start building your SaaS product today. Saasfy offers a range of features to help
-                  you get started.
+                  Buy our template and start building your SaaS product today. Saasfy offers a range
+                  of features to help you get started.
                 </p>
               </div>
             </div>
@@ -102,10 +111,12 @@ export default function Component() {
                 <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
                   Key Features
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Why Choose Saasfy?</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Why Choose Saasfy?
+                </h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Saasfy offers a wide range of features designed to help you build and scale your SaaS. Here are just a
-                  few of our favorites.
+                  Saasfy offers a wide range of features designed to help you build and scale your
+                  SaaS. Here are just a few of our favorites.
                 </p>
               </div>
             </div>
@@ -124,7 +135,8 @@ export default function Component() {
                   <UploadIcon className="h-10 w-10" />
                   <h3 className="text-xl font-bold">Every day updates</h3>
                   <p className="text-gray-500 dark:text-gray-400">
-                    We are constantly updating our platform to provide you with the latest features and improvements.
+                    We are constantly updating our platform to provide you with the latest features
+                    and improvements.
                   </p>
                 </CardContent>
               </Card>
@@ -133,7 +145,8 @@ export default function Component() {
                   <HelpCircleIcon className="h-10 w-10" />
                   <h3 className="text-xl font-bold">Transparency</h3>
                   <p className="text-gray-500 dark:text-gray-400">
-                    We believe in transparency and are committed to providing you with the best possible service.
+                    We believe in transparency and are committed to providing you with the best
+                    possible service.
                   </p>
                 </CardContent>
               </Card>
@@ -145,13 +158,18 @@ export default function Component() {
           <FAQ />
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center" id="pricing">
+        <section
+          className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center"
+          id="pricing"
+        >
           <Plans />
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32" id="subscribe">
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Stay in the Loop</h2>
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+                Stay in the Loop
+              </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
                 Subscribe to our newsletter to get the latest updates on Saasfy.
               </p>
@@ -163,7 +181,9 @@ export default function Component() {
         </section>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">© 2024 Saasfy. All rights reserved.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          © 2024 Saasfy. All rights reserved.
+        </p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           {/*<Link className="text-xs hover:underline underline-offset-4" href="#">*/}
           {/*  Terms of Service*/}
@@ -178,13 +198,13 @@ export default function Component() {
 }
 
 async function Plans() {
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
   const { data: plans, error } = await supabase
-    .from('Plan')
-    .select('*, Price(*)')
+    .from('plans')
+    .select('*, prices(*)')
     .eq('status', 'active')
-    .eq('Price.status', 'active');
+    .eq('prices.status', 'active');
 
   if (error) {
     return <div>Error loading plans</div>;
@@ -198,7 +218,7 @@ async function Plans() {
       </p>
       <div className="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-3 w-full max-w-6xl">
         {plans.map((plan) => (
-          <Card key={plan.id}>
+          <Card key={plan.id} className="flex flex-col justify-between">
             <CardHeader>
               <CardTitle>{plan.name}</CardTitle>
               <CardDescription>{plan.description}</CardDescription>
@@ -207,14 +227,14 @@ async function Plans() {
               <ul className="list-disc list-inside space-y-2">
                 {plan.features?.map((feature) => <li key={feature}>{feature}</li>)}
               </ul>
-              {plan.Price?.map((price) => (
+              {plan.prices?.map((price) => (
                 <div className="text-4xl font-bold my-4" key={price.id}>
                   ${price.amount / 100}/{price.interval}
                 </div>
               ))}
               <form action={`/api/public/subscriptions`} method="post">
                 <input type="hidden" name="planId" value={plan.id} />
-                <input type="hidden" name="priceId" value={plan.Price.at(0)?.id} />
+                <input type="hidden" name="priceId" value={plan.prices.at(0)?.id} />
                 <Button className="w-full">Choose Plan</Button>
               </form>
             </CardContent>
@@ -252,8 +272,8 @@ function FAQ() {
           <AccordionTrigger className="text-base font-semibold">What is Saasfy?</AccordionTrigger>
           <AccordionContent>
             <p className="text-sm">
-              Saasfy is a template designed to help you build your SaaS product. It provides a range of features and
-              components that can be customized to suit your needs.
+              Saasfy is a template designed to help you build your SaaS product. It provides a range
+              of features and components that can be customized to suit your needs.
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -263,8 +283,8 @@ function FAQ() {
           </AccordionTrigger>
           <AccordionContent>
             <p className="text-sm">
-              Saasfy is built with customization in mind. You can easily change colors, fonts, layouts and add or remove
-              components as needed. Our documentation{' '}
+              Saasfy is built with customization in mind. You can easily change colors, fonts,
+              layouts and add or remove components as needed. Our documentation{' '}
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
@@ -285,8 +305,8 @@ function FAQ() {
           </AccordionTrigger>
           <AccordionContent>
             <p className="text-sm">
-              Yes! You will need some basic knowledge of HTML, CSS and JavaScript to customize Saasfy for your product.
-              Our documentation{' '}
+              Yes! You will need some basic knowledge of HTML, CSS and JavaScript to customize
+              Saasfy for your product. Our documentation{' '}
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
@@ -307,8 +327,9 @@ function FAQ() {
           </AccordionTrigger>
           <AccordionContent>
             <p className="text-sm">
-              Absolutely! While Saasfy is designed with SaaS products in mind, it can be customized to suit any type of
-              product or service. But keep in mind that some features may not be relevant to your product.
+              Absolutely! While Saasfy is designed with SaaS products in mind, it can be customized
+              to suit any type of product or service. But keep in mind that some features may not be
+              relevant to your product.
             </p>
           </AccordionContent>
         </AccordionItem>

@@ -43,6 +43,5 @@ a set of tools to help you to build your SaaS products faster and easier.
 - [Next.js](https://nextjs.org/)
 - [shadcn/ui](http://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Prisma](https://www.prisma.io/)
 - [Supabase Auth](https://supabase.io/docs/guides/auth)
 - [Supabase Database](https://supabase.io/docs/guides/database)

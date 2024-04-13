@@ -1,19 +1,19 @@
 import { CreatePlanForm } from '@saasfy/components';
-import { createClient } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export default async function EditFormPage({ params }: { params: { id: string } }) {
   const id = params.id;
 
-  const supabase = createClient();
+  const supabase = createAdminClient();
 
-  const { data: plan } = await supabase.from('Plan').select('*, Price(*)').eq('id', id).single();
+  const { data: plan } = await supabase.from('plans').select('*, prices(*)').eq('id', id).single();
 
   return (
     <CreatePlanForm
       defaultValues={
         {
           ...plan,
-          prices: plan?.Price.map((price) => ({
+          prices: plan?.prices.map((price) => ({
             amount: price.amount / 100,
             interval: price.interval,
             status: price.status,
