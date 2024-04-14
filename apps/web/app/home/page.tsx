@@ -154,6 +154,120 @@ export default function Component() {
           </div>
         </section>
 
+        {/*features*/}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                  Detailed Features
+                </h2>
+
+                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                  Features for Saasfy marked with <span className="text-red-500">✗</span> are
+                  planned but not implemented yet. Features marked with{' '}
+                  <span className="text-green-500">✓</span> are already implemented! This list will
+                  be updated as we add more features to Saasfy.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col items-start justify-center gap-12 py-12 md:flex-row">
+              <div>
+                <h3 className="text-xl font-bold">Application</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <span className="text-green-500">✓</span> Workspaces: Create workspaces for your
+                    applications.
+                  </li>
+                  <li>
+                    <span className="text-green-500">✓</span> Projects: Create projects inside your
+                    workspace.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Members: Invite members to your
+                    workspace.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Roles: Assign roles to workspace
+                    members.
+                  </li>
+                  <li>
+                    <span className="text-green-500">✓</span> Subscription: Manage workspace billing
+                    and subscription.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Settings: Manage your workspace
+                    settings.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Domains: Manage workspace custom
+                    domains.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold">Authentication</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <span className="text-green-500">✓</span> Sign Up: Allow users to sign up.
+                  </li>
+                  <li>
+                    <span className="text-green-500">✓</span> Sign In: Allow users to sign in.
+                  </li>
+                  <li>
+                    <span className="text-green-500">✓</span> Sign Out: Allow users to sign out.
+                  </li>
+                  <li>
+                    <span className="text-green-500">✓</span> Social Login: Allow users to sign in
+                    with social accounts.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Forgot Password: Allow users to reset
+                    their password.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Update Profile: Allow users to update
+                    their profile.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Delete Account: Allow users to delete
+                    their account.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold">Admin</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <span className="text-red-500">✗</span> Users: Manage platform users.
+                  </li>
+                  <li>
+                    <span className="text-green-500">✓</span> Plans: Manage platform plans.
+                  </li>
+                </ul>
+
+                <h3 className="text-xl font-bold mt-4">Marketing</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <span className="text-red-500">✗</span> Landing Pages: Base landing pages for
+                    your products.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> Blog: Create blog posts to promote your
+                    products.
+                  </li>
+                  <li>
+                    <span className="text-red-500">✗</span> SEO: Optimize your products for search
+                    engines.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="w-full py-12 md:py-24 lg:py-32 mx-auto max-w-[480px]" id="faq">
           <FAQ />
         </section>

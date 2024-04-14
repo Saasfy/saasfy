@@ -23,6 +23,11 @@ export default function Component() {
             <p className="mt-2 text-center text-gray-500 dark:text-gray-400">
               Thank you for your purchase. Your subscription is now active.
             </p>
+
+            <p className="mt-2 text-center text-gray-500 dark:text-gray-400">
+              You can now access the app. Please click the button below to go to the app and login
+              using GitHub. Within 8 hours you will have access to the repository.
+            </p>
           </div>
         </CardContent>
         <CardFooter>
