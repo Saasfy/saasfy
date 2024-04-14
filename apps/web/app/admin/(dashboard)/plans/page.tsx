@@ -48,12 +48,12 @@ export default async function Component() {
                     ))}
                   </TableCell>
                   <TableCell>{plan.status}</TableCell>
-                  <TableCell className="">
+                  <TableCell className="flex flex-wrap gap-2">
                     <Button size="sm" variant="outline" asChild>
                       <Link href={`/plans/${plan.id}`}>Edit</Link>
                     </Button>
                     <DeletePlanButton id={plan.id}>
-                      <Button size="sm" variant="outline" type="button" className={'ml-2'}>
+                      <Button size="sm" variant="outline" type="button">
                         Delete
                       </Button>
                     </DeletePlanButton>
