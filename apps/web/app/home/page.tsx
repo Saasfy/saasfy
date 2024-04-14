@@ -12,6 +12,7 @@ import { Badge } from '@saasfy/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@saasfy/ui/tooltip';
 import { SubscribeForm } from './subscribe-form';
 import { createAdminClient } from '@saasfy/supabase/server';
+import { Checkbox } from '@saasfy/ui/checkbox';
 
 export default function Component() {
   return (
@@ -154,20 +155,16 @@ export default function Component() {
           </div>
         </section>
 
-        {/*features*/}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary-500 to-primary-600 text-black dark:text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  Detailed Features
-                </h2>
-
+                <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
+                  Roadmap
+                </div>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Version 1.0</h2>
                 <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Features for Saasfy marked with <span className="text-red-500">✗</span> are
-                  planned but not implemented yet. Features marked with{' '}
-                  <span className="text-green-500">✓</span> are already implemented! This list will
-                  be updated as we add more features to Saasfy.
+                  Here are some of the features we plan to include in version 1.0 of Saasfy.
                 </p>
               </div>
             </div>
@@ -175,33 +172,33 @@ export default function Component() {
               <div>
                 <h3 className="text-xl font-bold">Application</h3>
                 <ul className="space-y-2">
-                  <li>
-                    <span className="text-green-500">✓</span> Workspaces: Create workspaces for your
-                    applications.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    <span>Workspaces: Create workspaces for your applications.</span>
                   </li>
-                  <li>
-                    <span className="text-green-500">✓</span> Projects: Create projects inside your
-                    workspace.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    <span>Projects: Create projects inside your workspace.</span>
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Members: Invite members to your
-                    workspace.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    <span>Members: Invite members to your workspace.</span>
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Roles: Assign roles to workspace
-                    members.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Roles: Assign roles to workspace members.
                   </li>
-                  <li>
-                    <span className="text-green-500">✓</span> Subscription: Manage workspace billing
-                    and subscription.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    Subscription: Manage workspace billing and subscription.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Settings: Manage your workspace
-                    settings.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Settings: Manage your workspace settings.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Domains: Manage workspace custom
-                    domains.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Domains: Manage workspace custom domains.
                   </li>
                 </ul>
               </div>
@@ -209,30 +206,33 @@ export default function Component() {
               <div>
                 <h3 className="text-xl font-bold">Authentication</h3>
                 <ul className="space-y-2">
-                  <li>
-                    <span className="text-green-500">✓</span> Sign Up: Allow users to sign up.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    Sign Up: Allow users to sign up.
                   </li>
-                  <li>
-                    <span className="text-green-500">✓</span> Sign In: Allow users to sign in.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    Sign In: Allow users to sign in.
                   </li>
-                  <li>
-                    <span className="text-green-500">✓</span> Sign Out: Allow users to sign out.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    Sign Out: Allow users to sign out.
                   </li>
-                  <li>
-                    <span className="text-green-500">✓</span> Social Login: Allow users to sign in
-                    with social accounts.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    Social Login: Allow users to sign in with social accounts.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Forgot Password: Allow users to reset
-                    their password.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Forgot Password: Allow users to reset their password.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Update Profile: Allow users to update
-                    their profile.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Update Profile: Allow users to update their profile.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Delete Account: Allow users to delete
-                    their account.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Delete Account: Allow users to delete their account.
                   </li>
                 </ul>
               </div>
@@ -240,27 +240,29 @@ export default function Component() {
               <div>
                 <h3 className="text-xl font-bold">Admin</h3>
                 <ul className="space-y-2">
-                  <li>
-                    <span className="text-red-500">✗</span> Users: Manage platform users.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Users: Manage platform users.
                   </li>
-                  <li>
-                    <span className="text-green-500">✓</span> Plans: Manage platform plans.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked className="mt-1" />
+                    Plans: Manage platform plans.
                   </li>
                 </ul>
 
                 <h3 className="text-xl font-bold mt-4">Marketing</h3>
                 <ul className="space-y-2">
-                  <li>
-                    <span className="text-red-500">✗</span> Landing Pages: Base landing pages for
-                    your products.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Landing Pages: Base landing pages for your products.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> Blog: Create blog posts to promote your
-                    products.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    Blog: Create blog posts to promote your products.
                   </li>
-                  <li>
-                    <span className="text-red-500">✗</span> SEO: Optimize your products for search
-                    engines.
+                  <li className="flex items-start gap-2">
+                    <Checkbox checked={false} className="mt-1" />
+                    SEO: Optimize your products for search engines.
                   </li>
                 </ul>
               </div>
