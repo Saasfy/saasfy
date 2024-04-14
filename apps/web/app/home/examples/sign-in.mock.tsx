@@ -3,7 +3,7 @@ import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
 import { Label } from '@saasfy/ui/label';
 import { Input } from '@saasfy/ui/input';
-import { GithubIcon, GoogleIcon } from '../app/(auth)/signin/[view]/signin-form';
+import { GithubIcon, GoogleIcon } from '../../app/(auth)/signin/[view]/signin-form';
 
 export function SignInMock() {
   return (

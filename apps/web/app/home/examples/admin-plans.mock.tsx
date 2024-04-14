@@ -1,7 +1,7 @@
 import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
 import { CloudyIcon, UserCircleIcon } from 'lucide-react';
-import DashboardNav from '../admin/(dashboard)/nav';
+import DashboardNav from '../../admin/(dashboard)/nav';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 import React from 'react';
 import {

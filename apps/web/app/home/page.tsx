@@ -5,9 +5,9 @@ import { CloudIcon, CloudyIcon, HelpCircleIcon, UploadIcon } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@saasfy/ui/accordion';
 import { ThemeModeToggle } from '@saasfy/components';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@saasfy/ui/tabs';
-import { SignInMock } from './sign-in.mock';
-import { WorkspaceListMock } from './workspace-list.mock';
-import { AdminPlansMock } from './admin-plans.mock';
+import { SignInMock } from './examples/sign-in.mock';
+import { WorkspaceListMock } from './examples/workspace-list.mock';
+import { AdminPlansMock } from './examples/admin-plans.mock';
 import { Badge } from '@saasfy/ui/badge';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@saasfy/ui/tooltip';
 import { SubscribeForm } from './subscribe-form';
@@ -92,7 +92,7 @@ export default function Component() {
               </div>
             </TabsContent>
             <TabsContent value="workspace-list">
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+              <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
                 <WorkspaceListMock />
               </div>
             </TabsContent>

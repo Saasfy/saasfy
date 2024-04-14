@@ -45,3 +45,7 @@ a set of tools to help you to build your SaaS products faster and easier.
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Supabase Auth](https://supabase.io/docs/guides/auth)
 - [Supabase Database](https://supabase.io/docs/guides/database)
+
+### Getting Started
+
+WIP
