@@ -207,6 +207,7 @@ async function Plans() {
     .eq('prices.status', 'active');
 
   if (error) {
+    console.error(error);
     return <div>Error loading plans</div>;
   }
 
