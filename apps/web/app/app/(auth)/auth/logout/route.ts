@@ -1,15 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
-
 import { createAuthClient } from '@saasfy/supabase/server';
+import { getUrl } from '@saasfy/api/server';
 
-export async function GET(request: NextRequest) {
-  const requestUrl = new URL(request.url);
-
-  requestUrl.host = request.headers.get('host') || 'localhost:3000';
-
+export async function GET(request: Request) {
   const auth = createAuthClient();
 
   await auth.signOut();
 
-  return NextResponse.redirect(`${requestUrl.origin}/signin/signin`);
+  return Response.redirect(getUrl(request, '/signin/signin'));
 }
