@@ -40,6 +40,6 @@ export const config = {
      * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
      * Feel free to modify this pattern to include more paths.
      */
-    '/((?!api|_next/static|_static/|_vercel|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!api|_next/static|_static/|_vercel|_next/image|favicon.ico|robots.txt|opengraph-image|sitemap.xml|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

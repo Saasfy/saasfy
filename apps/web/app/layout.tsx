@@ -2,6 +2,8 @@ import './global.css';
 import { Toaster } from '@saasfy/ui/toaster';
 import { ThemeProvider } from '@saasfy/components';
 import { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: {
@@ -32,6 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </ThemeProvider>
         <Toaster />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
