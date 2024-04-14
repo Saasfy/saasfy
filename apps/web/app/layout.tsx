@@ -1,13 +1,22 @@
 import './global.css';
 import { Toaster } from '@saasfy/ui/toaster';
 import { ThemeProvider } from '@saasfy/components';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: 'Saasfy',
     template: `%s | Saasfy`,
   },
   description: 'Saasfy is a modern SaaS boilerplate.',
+  applicationName: 'Saasfy',
+  authors: {
+    url: 'https://github.com/IKatsuba',
+    name: 'Igor Katsuba',
+  },
+  creator: 'Igor Katsuba',
+  keywords: ['saas', 'boilerplate', 'nextjs', 'typescript'],
+  metadataBase: new URL('https://saasfy.dev'),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
