@@ -155,7 +155,7 @@ export default function Component() {
         </section>
 
         {/*features*/}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary-500 to-primary-600 text-white">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary-500 to-primary-600 text-black dark:text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
