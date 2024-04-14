@@ -8,7 +8,7 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx -y mintlify@latest dev",
+        "command": "npx -y mintlify@latest dev --port 3001",
         "cwd": "apps/docs"
       }
     }
