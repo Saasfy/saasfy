@@ -12,15 +12,15 @@ const CreatePlanSchema = z.object({
   status: z.enum(['active', 'inactive'], {
     description: 'Status must be either active or inactive',
   }),
-  maxUsers: z.coerce
+  max_users: z.coerce
     .number()
     .min(1, 'Max users must be greater than 0')
     .int('Max users must be a whole number'),
-  maxProjects: z.coerce
+  max_projects: z.coerce
     .number()
     .nonnegative('Max projects must be greater than or equal to 0')
     .int('Max projects must be a whole number'),
-  maxDomains: z.coerce
+  max_domains: z.coerce
     .number()
     .nonnegative('Max domains must be greater than or equal to 0')
     .int('Max domains must be a whole number'),
@@ -92,9 +92,9 @@ export async function createPlan(formData: z.infer<typeof CreatePlanSchema>) {
         stripe_product_id: product.id,
         features: formData.features.map((feature) => feature.name),
         description: formData.description,
-        max_domains: formData.maxDomains,
-        max_projects: formData.maxProjects,
-        max_users: formData.maxUsers,
+        max_domains: formData.max_domains,
+        max_projects: formData.max_projects,
+        max_users: formData.max_users,
         name: formData.name,
         status: formData.status,
       })
@@ -200,9 +200,9 @@ export async function updatePlan(id: string, formData: z.infer<typeof CreatePlan
         stripe_product_id: product.id,
         features: formData.features.map((feature) => feature.name),
         description: formData.description,
-        max_domains: formData.maxDomains,
-        max_projects: formData.maxProjects,
-        max_users: formData.maxUsers,
+        max_domains: formData.max_domains,
+        max_projects: formData.max_projects,
+        max_users: formData.max_users,
         name: formData.name,
         status: formData.status,
       })
@@ -223,7 +223,7 @@ export async function updatePlan(id: string, formData: z.infer<typeof CreatePlan
       )
       .eq('plan_id', id);
 
-    revalidatePath(`/`);
+    revalidatePath(`/home`);
 
     return { data: updatedPlan };
   } catch (error) {

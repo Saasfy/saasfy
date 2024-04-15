@@ -28,9 +28,9 @@ export type CreatePlanFormValues = {
   name: string;
   description: string;
   status: 'active' | 'inactive';
-  maxUsers: number;
-  maxProjects: number;
-  maxDomains: number;
+  max_users: number;
+  max_projects: number;
+  max_domains: number;
   features: Array<{
     name: string;
   }>;
@@ -52,9 +52,9 @@ export function CreatePlanForm({
     defaultValues: defaultValues ?? {
       description: '',
       status: 'active',
-      maxUsers: 1,
-      maxProjects: 0,
-      maxDomains: 0,
+      max_users: 1,
+      max_projects: 0,
+      max_domains: 0,
       name: '',
       prices: [],
       features: [],
@@ -406,7 +406,7 @@ export function CreatePlanForm({
                       <div className="space-y-2">
                         <FormField
                           control={form.control}
-                          name="maxUsers"
+                          name="max_users"
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Max Users</FormLabel>
@@ -421,7 +421,7 @@ export function CreatePlanForm({
                       <div className="space-y-2">
                         <FormField
                           control={form.control}
-                          name="maxProjects"
+                          name="max_projects"
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Max Projects</FormLabel>
@@ -436,7 +436,7 @@ export function CreatePlanForm({
                       <div className="space-y-2">
                         <FormField
                           control={form.control}
-                          name="maxDomains"
+                          name="max_domains"
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Max Domains</FormLabel>

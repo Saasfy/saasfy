@@ -44,6 +44,7 @@ export async function POST(req: Request) {
     success_url: getUrl(req, '/subscriptions/success').toString(),
     cancel_url: getUrl(req, '/subscriptions/cancel').toString(),
     mode: 'subscription',
+    allow_promotion_codes: true,
     subscription_data: {
       metadata: {
         ...data,
