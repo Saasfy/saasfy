@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
 import { Button } from '@saasfy/ui/button';
-import { CloudIcon, CloudyIcon, HelpCircleIcon, UploadIcon } from 'lucide-react';
+import { ArrowUpRightIcon, CloudIcon, CloudyIcon, HelpCircleIcon, UploadIcon } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@saasfy/ui/accordion';
 import { ThemeModeToggle } from '@saasfy/components';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@saasfy/ui/tabs';
@@ -51,7 +51,14 @@ export default function Component() {
           </nav>
         </div>
 
-        <div>
+        <div className="flex gap-2">
+          <Button asChild className="rounded-full">
+            <Link href="https://app.saasfy.dev/">
+              Demo
+              <ArrowUpRightIcon className="h-4 w-4 ml-1" />
+            </Link>
+          </Button>
+
           <ThemeModeToggle />
         </div>
       </header>
@@ -70,6 +77,16 @@ export default function Component() {
                   Buy our template and start building your SaaS product today. Saasfy offers a range
                   of features to help you get started.
                 </p>
+
+                <div className="flex justify-center gap-4">
+                  <Button
+                    size="lg"
+                    className="rounded-full bg-gradient-to-r from-blue-500 to-green-500 text-white"
+                    asChild
+                  >
+                    <Link href="#pricing">Get Access</Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
