@@ -1,7 +1,7 @@
 import type { User } from '@supabase/supabase-js';
 import { withUser } from './with-user';
 import { Tables } from '@saasfy/supabase';
-import { createAdminClient, createClient } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export function withWorkspaceAdmin<T extends { workspaceSlug: string } = { workspaceSlug: string }>(
   handler: (options: {

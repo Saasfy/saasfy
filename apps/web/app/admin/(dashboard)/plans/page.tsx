@@ -73,11 +73,9 @@ export default async function Component() {
             <p className="text-sm text-muted-foreground">
               You can start selling as soon as you add a plan.
             </p>
-            {/*<CreatePlanSheet asChild>*/}
             <Button className="mt-4" asChild>
               <Link href="/plans/new">Add Plan</Link>
             </Button>
-            {/*</CreatePlanSheet>*/}
           </div>
         </div>
       )}

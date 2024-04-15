@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@saasfy/ui/badge';
 import { CreateWorkspaceSheet } from '@saasfy/components';
 import { redirect } from 'next/navigation';
+import React from 'react';
 
 export default async function Component() {
   const user = await getUser();
@@ -75,8 +76,13 @@ export default async function Component() {
           </Table>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center h-64 border-2 border-dashed border-gray-300 rounded-lg">
-          <p className="text-lg">No workspaces have been created yet.</p>
+        <div className="flex flex-1 items-center justify-center rounded-lg border-2 border-dashed shadow-sm border-gray-200 dark:border-gray-500">
+          <div className="flex flex-col items-center gap-1 text-center">
+            <h3 className="text-2xl font-bold tracking-tight">You have no workspaces</h3>
+            <p className="text-sm text-muted-foreground">
+              Create a workspace to start building your projects
+            </p>
+          </div>
         </div>
       )}
     </>
