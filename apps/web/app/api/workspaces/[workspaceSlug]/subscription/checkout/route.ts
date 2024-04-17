@@ -1,6 +1,6 @@
 import { stripe } from '@saasfy/stripe/server';
 import { z } from 'zod';
-import { getUrl, withWorkspaceAdmin } from '@saasfy/api/server';
+import { getUrl, withWorkspaceOwner } from '@saasfy/api/server';
 import { createAdminClient } from '@saasfy/supabase/server';
 
 const FormData = z.object({
@@ -8,7 +8,7 @@ const FormData = z.object({
   planId: z.string(),
 });
 
-export const POST = withWorkspaceAdmin(async ({ req, user, workspace }) => {
+export const POST = withWorkspaceOwner(async ({ req, user, workspace }) => {
   const formData = await req.formData();
 
   const parsedData = FormData.safeParse({

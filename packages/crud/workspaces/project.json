@@ -1,0 +1,9 @@
+{
+  "name": "workspaces",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/crud/workspaces/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project workspaces --web",
+  "targets": {}
+}

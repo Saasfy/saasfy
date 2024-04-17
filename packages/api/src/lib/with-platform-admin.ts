@@ -1,7 +1,7 @@
 import { withUser } from './with-user';
 import type { User } from '@supabase/supabase-js';
 
-export function withAdmin<T>(
+export function withPlatformAdmin<T>(
   handler: (options: { req: Request; user: User; params: T }) => Promise<Response>,
 ) {
   return withUser<T>(async ({ user, ...options }) => {

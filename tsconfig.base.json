@@ -28,7 +28,11 @@
       "@saasfy/ui/*": ["packages/ui/*"],
       "@saasfy/ui/server": ["packages/ui/src/server.ts"],
       "@saasfy/utils": ["packages/utils/src/index.ts"],
-      "@saasfy/utils/server": ["packages/utils/src/server.ts"]
+      "@saasfy/utils/server": ["packages/utils/src/server.ts"],
+      "@saasfy/workspace-users": ["packages/crud/workspace-users/src/index.ts"],
+      "@saasfy/workspace-users/server": ["packages/crud/workspace-users/src/server.ts"],
+      "@saasfy/workspaces": ["packages/crud/workspaces/src/index.ts"],
+      "@saasfy/workspaces/server": ["packages/crud/workspaces/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
