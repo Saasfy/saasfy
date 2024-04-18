@@ -19,6 +19,12 @@
       "@saasfy/api/server": ["packages/api/src/server.ts"],
       "@saasfy/components": ["packages/components/src/index.ts"],
       "@saasfy/components/server": ["packages/components/src/server.ts"],
+      "@saasfy/crud/tokens": ["packages/crud/tokens/src/index.ts"],
+      "@saasfy/crud/tokens/server": ["packages/crud/tokens/src/server.ts"],
+      "@saasfy/crud/workspace-users": ["packages/crud/workspace-users/src/index.ts"],
+      "@saasfy/crud/workspace-users/server": ["packages/crud/workspace-users/src/server.ts"],
+      "@saasfy/crud/workspaces": ["packages/crud/workspaces/src/index.ts"],
+      "@saasfy/crud/workspaces/server": ["packages/crud/workspaces/src/server.ts"],
       "@saasfy/resend": ["packages/resend/src/index.ts"],
       "@saasfy/resend/server": ["packages/resend/src/server.ts"],
       "@saasfy/stripe": ["packages/stripe/src/index.ts"],
@@ -28,11 +34,7 @@
       "@saasfy/ui/*": ["packages/ui/*"],
       "@saasfy/ui/server": ["packages/ui/src/server.ts"],
       "@saasfy/utils": ["packages/utils/src/index.ts"],
-      "@saasfy/utils/server": ["packages/utils/src/server.ts"],
-      "@saasfy/workspace-users": ["packages/crud/workspace-users/src/index.ts"],
-      "@saasfy/workspace-users/server": ["packages/crud/workspace-users/src/server.ts"],
-      "@saasfy/workspaces": ["packages/crud/workspaces/src/index.ts"],
-      "@saasfy/workspaces/server": ["packages/crud/workspaces/src/server.ts"]
+      "@saasfy/utils/server": ["packages/utils/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

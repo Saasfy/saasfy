@@ -1,5 +1,5 @@
 import { withWorkspaceOwner, withWorkspaceUser } from '@saasfy/api/server';
-import { deleteWorkspace, updateWorkspace } from '@saasfy/workspaces/server';
+import { deleteWorkspace, updateWorkspace } from '@saasfy/crud/workspaces/server';
 
 export const PATCH = withWorkspaceUser(
   ['member', 'owner'],
@@ -32,4 +32,8 @@ export const DELETE = withWorkspaceOwner(async ({ req, workspace: { id } }) => {
       status: errors ? 400 : 200,
     },
   );
+});
+
+export const GET = withWorkspaceUser(['member', 'owner'], async ({ workspace }) => {
+  return Response.json({ workspace, errors: null });
 });

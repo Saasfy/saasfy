@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "db:gen:types": "supabase gen types typescript --local > packages/supabase/src/lib/db-types.ts",
+    "migration:create": "supabase db diff | supabase migration new",
     "stripe:webhook": "stripe listen --forward-to localhost:3000/api/webhooks/stripe",
     "build": "nx build web"
   },
@@ -49,6 +50,7 @@
     "embla-carousel-react": "^8.0.0",
     "input-otp": "^1.2.3",
     "lucide-react": "^0.363.0",
+    "nanoid": "^5.0.7",
     "next": "^14.1.4",
     "next-themes": "^0.3.0",
     "pg": "^8.11.5",

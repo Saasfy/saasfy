@@ -196,6 +196,44 @@ export type Database = {
           },
         ];
       };
+      tokens: {
+        Row: {
+          created_at: string;
+          expires: string | null;
+          hashed: string;
+          id: string;
+          masked: string;
+          name: string;
+          user: string;
+        };
+        Insert: {
+          created_at?: string;
+          expires?: string | null;
+          hashed: string;
+          id?: string;
+          masked: string;
+          name: string;
+          user: string;
+        };
+        Update: {
+          created_at?: string;
+          expires?: string | null;
+          hashed?: string;
+          id?: string;
+          masked?: string;
+          name?: string;
+          user?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_tokens_user_fkey';
+            columns: ['user'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       workspace_invites: {
         Row: {
           created_at: string;

@@ -27,6 +27,12 @@ export default function UserSettingsLayout({ children }: { children: ReactNode }
           >
             Notifications
           </Link>
+          <Link
+            href={`/settings/tokens`}
+            className={cn(path === `/settings/tokens` ? 'font-semibold text-primary' : '')}
+          >
+            API Tokens
+          </Link>
         </nav>
         <div className="grid gap-6">{children}</div>
       </div>

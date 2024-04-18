@@ -1,5 +1,5 @@
 {
-  "name": "workspace-users",
+  "name": "crud-workspace-users",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/crud/workspace-users/src",
   "projectType": "library",

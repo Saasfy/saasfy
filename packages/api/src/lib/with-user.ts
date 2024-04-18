@@ -5,7 +5,7 @@ export function withUser<T>(
   handler: (options: { req: Request; user: User; params: T }) => Promise<Response>,
 ) {
   return async (req: Request, options: { params: T }) => {
-    const user = await getUser();
+    const user = await getUser(req);
 
     if (!user) {
       return Response.json(

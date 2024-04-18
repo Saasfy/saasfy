@@ -3,13 +3,13 @@ import { withUser } from './with-user';
 import { Enums, Tables } from '@saasfy/supabase';
 import { createAdminClient } from '@saasfy/supabase/server';
 
-export function withWorkspaceUser<T extends { workspaceSlug: string } = { workspaceSlug: string }>(
+export function withWorkspaceUser<T>(
   roles: Enums<'Role'>[],
   handler: (options: {
     req: Request;
     user: User;
     workspace: Tables<'workspaces'>;
-    params: T;
+    params: T & { workspaceSlug: string };
     role?: Enums<'Role'> | null;
   }) => Promise<Response>,
 ) {
