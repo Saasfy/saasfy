@@ -1,5 +1,19 @@
 import { withUser } from '@saasfy/api/server';
-import { createToken } from '@saasfy/crud/tokens/server';
+import { createToken, getTokens } from '@saasfy/crud/tokens/server';
+
+export const GET = withUser(async ({ user }) => {
+  const { data: tokens, error } = await getTokens(user.id);
+
+  return Response.json(
+    {
+      tokens,
+      errors: error ? [error.message] : undefined,
+    },
+    {
+      status: error ? 400 : 200,
+    },
+  );
+});
 
 export const POST = withUser(async ({ req, user }) => {
   const data = await req.json();
