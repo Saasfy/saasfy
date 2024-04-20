@@ -1,7 +1,8 @@
-import { getUser } from '@saasfy/supabase/server';
 import { redirect } from 'next/navigation';
+
+import { getUser } from '@saasfy/supabase/server';
+
 import { SignInForm } from '../../../../app/(auth)/signin/[view]/signin-form';
-import * as process from 'process';
 
 export default async function SignInViews() {
   const user = await getUser();
@@ -11,7 +12,7 @@ export default async function SignInViews() {
   }
 
   return (
-    <div className="flex justify-center min-h-screen items-center">
+    <div className="flex min-h-screen items-center justify-center">
       <SignInForm view="signin" />
     </div>
   );

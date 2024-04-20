@@ -1,7 +1,6 @@
-import { Button } from '@saasfy/ui/button';
-import Link from 'next/link';
-import { Input } from '@saasfy/ui/input';
 import React, { Suspense } from 'react';
+import Link from 'next/link';
+
 import {
   ArrowUpRightIcon,
   Check,
@@ -11,19 +10,11 @@ import {
   SearchIcon,
   UserCircleIcon,
 } from 'lucide-react';
+
 import { ThemeModeToggle } from '@saasfy/components';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
-import { Badge } from '@saasfy/ui/badge';
 import { Tables } from '@saasfy/supabase';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@saasfy/ui/dropdown-menu';
-import { Popover, PopoverContent, PopoverTrigger } from '@saasfy/ui/popover';
+import { Badge } from '@saasfy/ui/badge';
+import { Button } from '@saasfy/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -33,6 +24,17 @@ import {
   CommandList,
   CommandSeparator,
 } from '@saasfy/ui/command';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@saasfy/ui/dropdown-menu';
+import { Input } from '@saasfy/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@saasfy/ui/popover';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 import { cn } from '@saasfy/utils';
 
 export function WorkspaceListMock() {
@@ -84,7 +86,7 @@ export function WorkspaceListMock() {
     <div>
       <Suspense fallback={<div>Loading...</div>}></Suspense>
       <div className="flex min-h-[720px] w-full flex-col">
-        <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-10">
+        <header className="bg-background sticky top-0 z-10 flex h-16 items-center gap-4 border-b px-4 md:px-6">
           <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             <Link className="flex items-center gap-2 text-lg font-semibold md:text-base" href={`/`}>
               <CloudyIcon className="h-6 w-6" />
@@ -132,7 +134,7 @@ export function WorkspaceListMock() {
           <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
             <form className="ml-auto flex-1 sm:flex-initial">
               <div className="relative">
-                <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <SearchIcon className="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
                 <Input
                   className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
                   placeholder="Search..."
@@ -163,13 +165,13 @@ export function WorkspaceListMock() {
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
           <>
             <div className="flex items-center">
-              <h1 className="font-semibold text-lg md:text-2xl">Workspaces</h1>
+              <h1 className="text-lg font-semibold md:text-2xl">Workspaces</h1>
 
               <Button className="ml-auto" size="sm">
                 Create Workspace
               </Button>
             </div>
-            <div className="border shadow-sm rounded-lg">
+            <div className="rounded-lg border shadow-sm">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -200,7 +202,7 @@ export function WorkspaceListMock() {
                         <Button size="sm" variant="outline" asChild>
                           <Link href={`#`}>
                             View
-                            <ArrowUpRightIcon className="h-4 w-4 ml-1" />
+                            <ArrowUpRightIcon className="ml-1 h-4 w-4" />
                           </Link>
                         </Button>
                       </TableCell>

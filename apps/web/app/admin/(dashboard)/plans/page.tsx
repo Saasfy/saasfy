@@ -1,8 +1,10 @@
-import { Button } from '@saasfy/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
-import { createAdminClient } from '@saasfy/supabase/server';
 import React from 'react';
 import Link from 'next/link';
+
+import { createAdminClient } from '@saasfy/supabase/server';
+import { Button } from '@saasfy/ui/button';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
+
 import { DeletePlanButton } from './_components/delete-plan-button';
 
 export default async function Component() {
@@ -16,7 +18,7 @@ export default async function Component() {
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
       <div className="flex items-center">
-        <h1 className="font-semibold text-lg md:text-2xl">Plans</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">Plans</h1>
         {plans?.length ? (
           <Button className="ml-auto" size="sm" asChild>
             <Link href="/plans/new">Add Plan</Link>
@@ -24,7 +26,7 @@ export default async function Component() {
         ) : null}
       </div>
       {plans?.length ? (
-        <div className="border shadow-sm rounded-lg">
+        <div className="rounded-lg border shadow-sm">
           <Table>
             <TableHeader>
               <TableRow>
@@ -70,7 +72,7 @@ export default async function Component() {
         <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">You have no plans yet.</h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               You can start selling as soon as you add a plan.
             </p>
             <Button className="mt-4" asChild>

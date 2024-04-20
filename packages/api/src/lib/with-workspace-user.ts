@@ -1,7 +1,9 @@
 import type { User } from '@supabase/supabase-js';
-import { withUser } from './with-user';
+
 import { Enums, Tables } from '@saasfy/supabase';
 import { createAdminClient } from '@saasfy/supabase/server';
+
+import { withUser } from './with-user';
 
 export function withWorkspaceUser<T>(
   roles: Enums<'Role'>[],

@@ -1,8 +1,9 @@
-import { stripe } from '@saasfy/stripe/server';
-import Stripe from 'stripe';
-import { createAdminClient } from '@saasfy/supabase/server';
-import { v4 as uuidv4 } from 'uuid';
 import { Client } from 'pg';
+import Stripe from 'stripe';
+import { v4 as uuidv4 } from 'uuid';
+
+import { stripe } from '@saasfy/stripe/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export async function POST(req: Request) {
   if (!process.env.STRIPE_WEBHOOK_SECRET) {

@@ -1,5 +1,5 @@
-import { createAuthClient } from '@saasfy/supabase/server';
 import { getUrl } from '@saasfy/api/server';
+import { createAuthClient } from '@saasfy/supabase/server';
 
 export async function GET(request: Request) {
   // The `/auth/callback` route is required for the server-side auth flow implemented

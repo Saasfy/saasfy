@@ -1,5 +1,6 @@
-import { createAdminClient } from '@saasfy/supabase/server';
 import { redirect } from 'next/navigation';
+
+import { createAdminClient } from '@saasfy/supabase/server';
 
 export default async function ProjectPage({ params }: { params: { project: string } }) {
   const supabase = createAdminClient();
@@ -12,7 +13,7 @@ export default async function ProjectPage({ params }: { params: { project: strin
 
   return (
     <div className="flex items-center">
-      <h1 className="font-semibold text-lg md:text-2xl">{projects.at(0)?.name}</h1>
+      <h1 className="text-lg font-semibold md:text-2xl">{projects.at(0)?.name}</h1>
     </div>
   );
 }

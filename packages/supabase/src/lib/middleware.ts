@@ -1,5 +1,6 @@
-import { type CookieOptions, createServerClient } from '@supabase/ssr';
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
+
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
 const createClient = (request: NextRequest, path: URL) => {
   // Create an unmodified response

@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
-import { Nav } from './nav';
+
 import { createAdminClient } from '@saasfy/supabase/server';
+
+import { Nav } from './nav';
 
 export default async function SettingsLayout({
   children,
@@ -28,7 +30,7 @@ export default async function SettingsLayout({
         <h1 className="text-3xl font-semibold">Workspace settings</h1>
       </div>
       <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
-        <nav className="grid gap-4 text-sm text-muted-foreground">
+        <nav className="text-muted-foreground grid gap-4 text-sm">
           <Nav workspace={workspace} />
         </nav>
         <div className="grid gap-6">{children}</div>

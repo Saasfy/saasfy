@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,7 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from 'packages/ui/dropdown-menu';
-import Link from 'next/link';
 
 export function AccountMenu({ children }: { children: React.ReactNode }) {
   return (

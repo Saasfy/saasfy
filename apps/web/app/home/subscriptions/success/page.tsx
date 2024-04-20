@@ -1,8 +1,10 @@
-import { CheckIcon } from 'lucide-react';
-import { Card, CardContent, CardFooter, CardHeader } from '@saasfy/ui/card';
-import Link from 'next/link';
-import { Button } from '@saasfy/ui/button';
 import { headers } from 'next/headers';
+import Link from 'next/link';
+
+import { CheckIcon } from 'lucide-react';
+
+import { Button } from '@saasfy/ui/button';
+import { Card, CardContent, CardFooter, CardHeader } from '@saasfy/ui/card';
 
 export default function Component() {
   const host = headers().get('host');
@@ -10,10 +12,10 @@ export default function Component() {
   const appUrl = `${host && host.includes('localhost') ? 'http' : 'https'}://app.${host}`;
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen py-12">
+    <main className="flex min-h-screen flex-col items-center justify-center py-12">
       <Card>
-        <CardHeader className={'justify-center items-center'}>
-          <CheckIcon className="w-16 h-16 text-green-500" />
+        <CardHeader className={'items-center justify-center'}>
+          <CheckIcon className="h-16 w-16 text-green-500" />
           <h2 className="mt-4 text-3xl font-extrabold text-gray-900 dark:text-gray-100">
             Payment Successful!
           </h2>

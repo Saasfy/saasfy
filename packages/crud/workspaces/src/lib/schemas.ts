@@ -1,4 +1,5 @@
 import { z, ZodType } from 'zod';
+
 import { Enums, TablesInsert, TablesUpdate } from '@saasfy/supabase';
 
 export const CreateWorkspaceSchema = z.object({

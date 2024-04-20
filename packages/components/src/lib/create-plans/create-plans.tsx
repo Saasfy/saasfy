@@ -1,9 +1,13 @@
 'use client';
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@saasfy/ui/form';
-import { Button } from '@saasfy/ui/button';
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 import { ChevronLeft, PlusCircle } from 'lucide-react';
+import { useFieldArray, useForm } from 'react-hook-form';
+
+import { Button } from '@saasfy/ui/button';
 import {
   Card,
   CardContent,
@@ -12,17 +16,16 @@ import {
   CardHeader,
   CardTitle,
 } from '@saasfy/ui/card';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@saasfy/ui/form';
 import { Input } from '@saasfy/ui/input';
-import { Textarea } from '@saasfy/ui/textarea';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
-import { ToggleGroup, ToggleGroupItem } from '@saasfy/ui/toggle-group';
-import { Switch } from '@saasfy/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@saasfy/ui/select';
-import React from 'react';
-import { useFieldArray, useForm } from 'react-hook-form';
-import { createPlan, updatePlan } from './actions';
+import { Switch } from '@saasfy/ui/switch';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
+import { Textarea } from '@saasfy/ui/textarea';
+import { ToggleGroup, ToggleGroupItem } from '@saasfy/ui/toggle-group';
 import { useToast } from '@saasfy/ui/use-toast';
-import { useRouter } from 'next/navigation';
+
+import { createPlan, updatePlan } from './actions';
 
 export type CreatePlanFormValues = {
   name: string;
@@ -128,7 +131,7 @@ export function CreatePlanForm({
   }
 
   return (
-    <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 mb-12">
+    <div className="mb-12 flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
       <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>

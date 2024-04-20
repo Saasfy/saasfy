@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { Check, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+
+import { Check, Moon, Sun } from 'lucide-react';
 
 import { Button } from '@saasfy/ui/button';
 import {

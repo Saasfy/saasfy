@@ -1,9 +1,11 @@
 'use server';
 
-import { createAdminClient, createClient } from '@saasfy/supabase/server';
 import { revalidatePath } from 'next/cache';
-import { z, ZodError } from 'zod';
+
 import slugify from 'slugify';
+import { z, ZodError } from 'zod';
+
+import { createAdminClient, createClient } from '@saasfy/supabase/server';
 
 const CreateProjectSchema = z.object({
   name: z.string().min(1, 'Name is required'),

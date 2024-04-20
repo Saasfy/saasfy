@@ -1,7 +1,7 @@
 export default async function Upgrade({ params }: { params: { workspaceSlug: string } }) {
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6">Members</h1>
+      <h1 className="mb-6 text-4xl font-bold">Members</h1>
     </>
   );
 }

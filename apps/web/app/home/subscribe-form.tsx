@@ -1,9 +1,10 @@
 'use client';
 
-import { Input } from '@saasfy/ui/input';
 import { Button } from '@saasfy/ui/button';
-import { subscribeAction } from './subscribe-action';
+import { Input } from '@saasfy/ui/input';
 import { useToast } from '@saasfy/ui/use-toast';
+
+import { subscribeAction } from './subscribe-action';
 
 export function SubscribeForm() {
   const { toast } = useToast();

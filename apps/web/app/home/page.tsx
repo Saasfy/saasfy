@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
-import { Button } from '@saasfy/ui/button';
+
 import {
   ArrowUpRightIcon,
   CloudIcon,
@@ -9,48 +8,52 @@ import {
   HelpCircleIcon,
   UploadIcon,
 } from 'lucide-react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@saasfy/ui/accordion';
+
 import { ThemeModeToggle } from '@saasfy/components';
+import { createAdminClient } from '@saasfy/supabase/server';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@saasfy/ui/accordion';
+import { Badge } from '@saasfy/ui/badge';
+import { Button } from '@saasfy/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
+import { Checkbox } from '@saasfy/ui/checkbox';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@saasfy/ui/tabs';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@saasfy/ui/tooltip';
+
+import { AdminPlansMock } from './examples/admin-plans.mock';
 import { SignInMock } from './examples/sign-in.mock';
 import { WorkspaceListMock } from './examples/workspace-list.mock';
-import { AdminPlansMock } from './examples/admin-plans.mock';
-import { Badge } from '@saasfy/ui/badge';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@saasfy/ui/tooltip';
 import { SubscribeForm } from './subscribe-form';
-import { createAdminClient } from '@saasfy/supabase/server';
-import { Checkbox } from '@saasfy/ui/checkbox';
 
 export default function Component() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center border-b justify-between">
+    <div className="flex min-h-screen flex-col">
+      <header className="flex h-14 items-center justify-between border-b px-4 lg:px-6">
         <div className="flex justify-start">
           <Link className="flex items-center justify-center" href="#">
             <CloudyIcon className="h-6 w-6" />
             <span className="sr-only">Saasfy</span>
           </Link>
-          <nav className="hidden sm:flex gap-4 sm:gap-6 ml-4 ">
+          <nav className="ml-4 hidden gap-4 sm:flex sm:gap-6 ">
             <Link
-              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              className="text-foreground/60 text-sm font-medium underline-offset-4 hover:underline"
               href="#pages"
             >
               Pages
             </Link>
             <Link
-              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              className="text-foreground/60 text-sm font-medium underline-offset-4 hover:underline"
               href="#pricing"
             >
               Pricing
             </Link>
             <Link
-              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              className="text-foreground/60 text-sm font-medium underline-offset-4 hover:underline"
               href="#faq"
             >
               FAQ
             </Link>
             <Link
-              className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
+              className="text-foreground/60 text-sm font-medium underline-offset-4 hover:underline"
               href="#subscribe"
             >
               Subscribe
@@ -62,7 +65,7 @@ export default function Component() {
           <Button asChild className="rounded-full">
             <Link href="https://app.saasfy.dev/">
               Demo
-              <ArrowUpRightIcon className="h-4 w-4 ml-1" />
+              <ArrowUpRightIcon className="ml-1 h-4 w-4" />
             </Link>
           </Button>
 
@@ -110,7 +113,7 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 px-8">
+        <section className="w-full px-8 py-12 md:py-24 lg:py-32">
           <Tabs defaultValue="signin" id="pages" orientation="vertical">
             <TabsList className="h-auto flex-wrap justify-start">
               <TabsTrigger value="signin">Sign in page</TabsTrigger>
@@ -124,17 +127,17 @@ export default function Component() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="signin">
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+              <div className="bg-card text-card-foreground rounded-lg border shadow-sm">
                 <SignInMock />
               </div>
             </TabsContent>
             <TabsContent value="workspace-list">
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+              <div className="bg-card text-card-foreground overflow-hidden rounded-lg border shadow-sm">
                 <WorkspaceListMock />
               </div>
             </TabsContent>
             <TabsContent value="plans">
-              <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+              <div className="bg-card text-card-foreground rounded-lg border shadow-sm">
                 <AdminPlansMock />
               </div>
             </TabsContent>
@@ -191,7 +194,7 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary-500 to-primary-600 text-black dark:text-white">
+        <section className="from-primary-500 to-primary-600 w-full bg-gradient-to-r py-12 text-black md:py-24 lg:py-32 dark:text-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -286,7 +289,7 @@ export default function Component() {
                   </li>
                 </ul>
 
-                <h3 className="text-xl font-bold mt-4">Marketing</h3>
+                <h3 className="mt-4 text-xl font-bold">Marketing</h3>
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <Checkbox checked={false} className="mt-1" />
@@ -306,12 +309,12 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 mx-auto max-w-[480px]" id="faq">
+        <section className="mx-auto w-full max-w-[480px] py-12 md:py-24 lg:py-32" id="faq">
           <FAQ />
         </section>
 
         <section
-          className="w-full py-12 md:py-24 lg:py-32 flex flex-col items-center justify-center"
+          className="flex w-full flex-col items-center justify-center py-12 md:py-24 lg:py-32"
           id="pricing"
         >
           <Plans />
@@ -332,11 +335,11 @@ export default function Component() {
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+      <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6">
         <p className="text-xs text-gray-500 dark:text-gray-400">
           © 2024 Saasfy. All rights reserved.
         </p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+        <nav className="flex gap-4 sm:ml-auto sm:gap-6">
           {/*<Link className="text-xs hover:underline underline-offset-4" href="#">*/}
           {/*  Terms of Service*/}
           {/*</Link>*/}
@@ -365,11 +368,11 @@ async function Plans() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6">Want to support project?</h1>
-      <p className="text-lg text-center mb-12 px-4 md:px-0 max-w-[700px]">
+      <h1 className="mb-6 text-4xl font-bold">Want to support project?</h1>
+      <p className="mb-12 max-w-[700px] px-4 text-center text-lg md:px-0">
         We offer different ways to support the project. Choose the plan that best suits your needs.
       </p>
-      <div className="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-3 w-full max-w-6xl">
+      <div className="grid w-full max-w-6xl grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
         {plans.map((plan) => (
           <Card key={plan.id} className="flex flex-col justify-between">
             <CardHeader>
@@ -377,11 +380,11 @@ async function Plans() {
               <CardDescription>{plan.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside space-y-2">
+              <ul className="list-inside list-disc space-y-2">
                 {plan.features?.map((feature) => <li key={feature}>{feature}</li>)}
               </ul>
               {plan.prices?.map((price) => (
-                <div className="text-4xl font-bold my-4" key={price.id}>
+                <div className="my-4 text-4xl font-bold" key={price.id}>
                   ${price.amount / 100}/{price.interval}
                 </div>
               ))}
@@ -400,12 +403,12 @@ async function Plans() {
             <CardDescription>Custom plan for you</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc list-inside space-y-2">
+            <ul className="list-inside list-disc space-y-2">
               <li>Custom Features</li>
               <li>Custom Support</li>
               <li>Estimate on request</li>
             </ul>
-            <div className="text-4xl font-bold my-4">Contact Us</div>
+            <div className="my-4 text-4xl font-bold">Contact Us</div>
             <Button className="w-full" asChild>
               <Link href="mailto:igor@katsuba.dev">Get in Touch</Link>
             </Button>
@@ -419,7 +422,7 @@ async function Plans() {
 function FAQ() {
   return (
     <>
-      <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+      <h2 className="mb-4 text-2xl font-bold">Frequently Asked Questions</h2>
       <Accordion className="w-full" collapsible type="single">
         <AccordionItem value="question1">
           <AccordionTrigger className="text-base font-semibold">What is Saasfy?</AccordionTrigger>

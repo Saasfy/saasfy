@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
 import {
@@ -11,6 +12,7 @@ import {
 } from 'react-hook-form';
 
 import { cn } from '@saasfy/utils';
+
 import { Label } from './label';
 
 const Form = FormProvider;
@@ -124,7 +126,7 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-muted-foreground text-sm', className)}
       {...props}
     />
   );
@@ -146,7 +148,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn('text-sm font-medium text-destructive', className)}
+      className={cn('text-destructive text-sm font-medium', className)}
       {...props}
     >
       {body}

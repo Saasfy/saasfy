@@ -1,8 +1,11 @@
-import Link from 'next/link';
-import { CloudyIcon } from 'lucide-react';
-import { getUser } from '@saasfy/supabase/server';
-import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+
+import { CloudyIcon } from 'lucide-react';
+
+import { getUser } from '@saasfy/supabase/server';
+
 import DashboardNav from './nav';
 
 export default async function Component({ children }: { children: ReactNode }) {
@@ -14,7 +17,7 @@ export default async function Component({ children }: { children: ReactNode }) {
 
   if (user.email !== process.env.SAASFY_ADMIN_EMAIL) {
     return (
-      <div className="flex justify-center min-h-screen items-center">
+      <div className="flex min-h-screen items-center justify-center">
         <h1 className="text-2xl font-semibold">You are not authorized to access this page.</h1>
       </div>
     );

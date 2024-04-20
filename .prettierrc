@@ -9,5 +9,21 @@
         "proseWrap": "always"
       }
     }
+  ],
+  "plugins": [
+    "prettier-plugin-packagejson",
+    "prettier-plugin-tailwindcss",
+    "@ianvs/prettier-plugin-sort-imports"
+  ],
+  "importOrder": [
+    "^react$",
+    "next",
+    "",
+    "<BUILTIN_MODULES>",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@(saasfy)/(.*)$",
+    "",
+    "^[./]"
   ]
 }

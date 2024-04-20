@@ -1,9 +1,11 @@
 'use server';
 
-import { createAuthClient } from '@saasfy/supabase/server';
-import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+
 import { z, ZodError } from 'zod';
+
+import { createAuthClient } from '@saasfy/supabase/server';
 
 const LoginSchema = z.object({
   email: z.string().email().email('Invalid email'),

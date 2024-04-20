@@ -1,11 +1,13 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
+import React from 'react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+
+import { ArrowUpRightIcon, SettingsIcon } from 'lucide-react';
+
+import { CreateProjectSheet } from '@saasfy/components';
 import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
-import { redirect } from 'next/navigation';
-import { CreateProjectSheet } from '@saasfy/components';
-import Link from 'next/link';
-import { ArrowUpRightIcon, SettingsIcon } from 'lucide-react';
-import React from 'react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 
 export default async function Component({ params }: { params: { workspaceSlug: string } }) {
   const user = await getUser();
@@ -40,7 +42,7 @@ export default async function Component({ params }: { params: { workspaceSlug: s
               <span className="sr-only">Settings</span>
             </Link>
           </Button>
-          <h1 className="font-semibold text-lg md:text-2xl">{workspace?.name}</h1>
+          <h1 className="text-lg font-semibold md:text-2xl">{workspace?.name}</h1>
         </div>
 
         <CreateProjectSheet asChild workspace={workspace}>
@@ -50,7 +52,7 @@ export default async function Component({ params }: { params: { workspaceSlug: s
         </CreateProjectSheet>
       </div>
       {projects?.length ? (
-        <div className="border shadow-sm rounded-lg">
+        <div className="rounded-lg border shadow-sm">
           <Table>
             <TableHeader>
               <TableRow>
@@ -66,7 +68,7 @@ export default async function Component({ params }: { params: { workspaceSlug: s
                     <Button size="sm" variant="outline" asChild>
                       <Link href={`/${workspace!.slug}/${project.slug}`}>
                         View
-                        <ArrowUpRightIcon className="h-4 w-4 ml-1" />
+                        <ArrowUpRightIcon className="ml-1 h-4 w-4" />
                       </Link>
                     </Button>
                   </TableCell>
@@ -76,10 +78,10 @@ export default async function Component({ params }: { params: { workspaceSlug: s
           </Table>
         </div>
       ) : (
-        <div className="flex flex-1 items-center justify-center rounded-lg border-2 border-dashed shadow-sm border-gray-200 dark:border-gray-500">
+        <div className="flex flex-1 items-center justify-center rounded-lg border-2 border-dashed border-gray-200 shadow-sm dark:border-gray-500">
           <div className="flex flex-col items-center gap-1 text-center">
             <h3 className="text-2xl font-bold tracking-tight">You have no projects yet.</h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               You can create a project to get started.
             </p>
           </div>
