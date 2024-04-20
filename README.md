@@ -28,7 +28,7 @@ a set of tools to help you to build your SaaS products faster and easier.
   - [ ] **Landing Pages**: Base landing pages for your products.
   - [ ] **Blog**: Create blog posts to promote your products.
   - [ ] **SEO**: Optimize your products for search engines.
-- [ ] **Public API & Tokens**: Manage your API tokens to access your products.
+- [x] **Public API & Tokens**: Manage user API tokens to access your products.
 - [ ] **Documentation**
 - [x] **Local Development**: Develop your SaaS products locally.
 - [ ] **Workspace/project search and command palette**
