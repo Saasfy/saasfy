@@ -1,7 +1,14 @@
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
 import { Button } from '@saasfy/ui/button';
-import { ArrowUpRightIcon, CloudIcon, CloudyIcon, HelpCircleIcon, UploadIcon } from 'lucide-react';
+import {
+  ArrowUpRightIcon,
+  CloudIcon,
+  CloudyIcon,
+  GithubIcon,
+  HelpCircleIcon,
+  UploadIcon,
+} from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@saasfy/ui/accordion';
 import { ThemeModeToggle } from '@saasfy/components';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@saasfy/ui/tabs';
@@ -23,7 +30,7 @@ export default function Component() {
             <CloudyIcon className="h-6 w-6" />
             <span className="sr-only">Saasfy</span>
           </Link>
-          <nav className="flex gap-4 sm:gap-6 ml-4">
+          <nav className="hidden sm:flex gap-4 sm:gap-6 ml-4 ">
             <Link
               className="text-sm font-medium hover:underline underline-offset-4 text-foreground/60"
               href="#pages"
@@ -59,6 +66,18 @@ export default function Component() {
             </Link>
           </Button>
 
+          <Button size="icon" asChild variant="secondary" className="rounded-full">
+            <Link href="https://twitter.com/katsuba_igor">
+              <XIcon className={'h-4 w-4'} />
+            </Link>
+          </Button>
+
+          <Button size="icon" asChild variant="secondary" className="rounded-full">
+            <Link href="https://github.com/Saasfy/saasfy">
+              <GithubIcon className="h-4 w-4" />
+            </Link>
+          </Button>
+
           <ThemeModeToggle />
         </div>
       </header>
@@ -74,8 +93,8 @@ export default function Component() {
                   Build your own SaaS
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Buy our template and start building your SaaS product today. Saasfy offers a range
-                  of features to help you get started.
+                  Support our project and start building your SaaS product today. Saasfy offers a
+                  range of features to help you get started.
                 </p>
 
                 <div className="flex justify-center gap-4">
@@ -84,7 +103,7 @@ export default function Component() {
                     className="rounded-full bg-gradient-to-r from-blue-500 to-green-500 text-white"
                     asChild
                   >
-                    <Link href="#pricing">Get Access</Link>
+                    <Link href="#pricing">Support</Link>
                   </Button>
                 </div>
               </div>
@@ -469,5 +488,16 @@ function FAQ() {
         </AccordionItem>
       </Accordion>
     </>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 1200 1227" fill="none" className={className}>
+      <path
+        d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
