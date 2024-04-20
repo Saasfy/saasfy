@@ -346,9 +346,9 @@ async function Plans() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6">Choose Your Plan</h1>
+      <h1 className="text-4xl font-bold mb-6">Want to support project?</h1>
       <p className="text-lg text-center mb-12 px-4 md:px-0 max-w-[700px]">
-        We offer different plans to meet your needs. Choose the one that suits you best.
+        We offer different ways to support the project. Choose the plan that best suits your needs.
       </p>
       <div className="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-3 w-full max-w-6xl">
         {plans.map((plan) => (
@@ -369,7 +369,7 @@ async function Plans() {
               <form action={`/api/public/subscriptions`} method="post">
                 <input type="hidden" name="planId" value={plan.id} />
                 <input type="hidden" name="priceId" value={plan.prices.at(0)?.id} />
-                <Button className="w-full">Choose Plan</Button>
+                <Button className="w-full">Support</Button>
               </form>
             </CardContent>
           </Card>
@@ -377,8 +377,8 @@ async function Plans() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Enterprise</CardTitle>
-            <CardDescription>For large teams with custom needs.</CardDescription>
+            <CardTitle>Do not find your way to support?</CardTitle>
+            <CardDescription>Custom plan for you</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="list-disc list-inside space-y-2">
