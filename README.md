@@ -10,7 +10,7 @@ a set of tools to help you to build your SaaS products faster and easier.
   - [x] **Projects**: Create projects inside your workspace.
   - [ ] **Members**: Invite members to your workspace.
   - [ ] **Roles**: Assign roles to workspace members.
-  - [x] **Subscription**: Manage workspace billing and subscription. 
+  - [x] **Subscription**: Manage workspace billing and subscription.
   - [ ] **Settings**: Manage your workspace settings.
   - [ ] **Domains**: Manage workspace custom domains.
 - [ ] **Authentication**: Manage user authentication.
