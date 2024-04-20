@@ -1,5 +1,8 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
+import { Button } from '@saasfy/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -10,11 +13,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@saasfy/ui/dialog';
-import { Button } from '@saasfy/ui/button';
-import { Label } from '@saasfy/ui/label';
 import { Input } from '@saasfy/ui/input';
+import { Label } from '@saasfy/ui/label';
 import { useToast } from '@saasfy/ui/use-toast';
-import { useRouter } from 'next/navigation';
 
 export function CreateTokenDialog({ children }: { children: React.ReactNode }) {
   const { toast } = useToast();

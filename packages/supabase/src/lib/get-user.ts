@@ -1,6 +1,8 @@
-import { createAdminClient, createAuthClient } from './server-client';
-import { hashToken } from '@saasfy/utils/server';
 import { User } from '@supabase/supabase-js';
+
+import { hashToken } from '@saasfy/utils/server';
+
+import { createAdminClient, createAuthClient } from './server-client';
 
 export async function getUser(request?: Request): Promise<User | null> {
   const {

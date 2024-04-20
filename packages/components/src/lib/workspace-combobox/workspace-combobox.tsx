@@ -1,11 +1,12 @@
 'use client';
 
-import { Tables } from '@saasfy/supabase';
-import { useParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '@saasfy/ui/popover';
-import { Button } from '@saasfy/ui/button';
+import { useParams, useRouter } from 'next/navigation';
+
 import { Check, ChevronsUpDown, PlusIcon } from 'lucide-react';
+
+import { Tables } from '@saasfy/supabase';
+import { Button } from '@saasfy/ui/button';
 import {
   Command,
   CommandEmpty,
@@ -15,7 +16,9 @@ import {
   CommandList,
   CommandSeparator,
 } from '@saasfy/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@saasfy/ui/popover';
 import { cn } from '@saasfy/utils';
+
 import { CreateWorkspaceSheet } from '../create-workspace/create-workspace-sheet';
 
 export function WorkspaceCombobox({

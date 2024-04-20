@@ -1,11 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRightIcon } from 'lucide-react';
-import { Button } from '@saasfy/ui/button';
 import { usePathname } from 'next/navigation';
-import { cn } from '@saasfy/utils';
+
+import { ArrowUpRightIcon } from 'lucide-react';
+
 import { Tables } from '@saasfy/supabase';
+import { Button } from '@saasfy/ui/button';
+import { cn } from '@saasfy/utils';
 
 export function Nav({ workspace }: { workspace: Tables<'workspaces'> }) {
   const path = usePathname();

@@ -1,9 +1,12 @@
 import './global.css';
-import { Toaster } from '@saasfy/ui/toaster';
-import { ThemeProvider } from '@saasfy/components';
-import { Metadata } from 'next';
-import { Analytics } from '@vercel/analytics/react';
+
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Metadata } from 'next';
+
+import { Analytics } from '@vercel/analytics/react';
+
+import { ThemeProvider } from '@saasfy/components';
+import { Toaster } from '@saasfy/ui/toaster';
 
 export const metadata: Metadata = {
   title: {

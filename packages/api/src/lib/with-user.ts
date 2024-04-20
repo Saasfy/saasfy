@@ -1,4 +1,5 @@
 import type { User } from '@supabase/supabase-js';
+
 import { getUser } from '@saasfy/supabase/server';
 
 export function withUser<T>(

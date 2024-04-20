@@ -1,12 +1,13 @@
-import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
+
+import { Button } from '@saasfy/ui/button';
 
 export default function Component() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md dark:bg-gray-900">
-        <h1 className="text-3xl font-bold text-center">Check Your Email</h1>
-        <p className="text-gray-600 dark:text-gray-400 text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 dark:bg-gray-800">
+      <div className="w-full max-w-md space-y-6 rounded-lg bg-white p-8 shadow-md dark:bg-gray-900">
+        <h1 className="text-center text-3xl font-bold">Check Your Email</h1>
+        <p className="text-center text-gray-600 dark:text-gray-400">
           We have sent an email with further instructions to reset your password. Please check your
           inbox and follow the instructions.
         </p>

@@ -1,7 +1,8 @@
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
+import { Button } from '@saasfy/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@saasfy/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
-import { Button } from '@saasfy/ui/button';
-import { createAdminClient, getUser } from '@saasfy/supabase/server';
+
 import { CreateTokenDialog } from './create-token-dialog';
 import { RevokeButton } from './revoke-button';
 
@@ -22,9 +23,9 @@ export default async function Component() {
 
   return (
     <div className="container mx-auto px-4">
-      <div className="max-w-3xl mx-auto">
+      <div className="mx-auto max-w-3xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Your Tokens</h1>
+          <h1 className="mb-2 text-3xl font-bold">Your Tokens</h1>
           <p className="text-gray-600">
             Manage your personal access tokens for secure authentication.
           </p>

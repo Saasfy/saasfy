@@ -1,7 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
-import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
+
 import { createAdminClient } from '@saasfy/supabase/server';
+import { Button } from '@saasfy/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
 
 export default async function Upgrade({ params }: { params: { workspaceSlug: string } }) {
   const supabase = createAdminClient();
@@ -13,11 +14,11 @@ export default async function Upgrade({ params }: { params: { workspaceSlug: str
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6">Choose Your Plan</h1>
-      <p className="text-lg text-center mb-12 px-4 md:px-0 max-w-[700px]">
+      <h1 className="mb-6 text-4xl font-bold">Choose Your Plan</h1>
+      <p className="mb-12 max-w-[700px] px-4 text-center text-lg md:px-0">
         We offer different plans to meet your needs. Choose the one that suits you best.
       </p>
-      <div className="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-3 w-full max-w-6xl">
+      <div className="grid w-full max-w-6xl grid-cols-1 gap-4 md:grid-cols-3 md:gap-8">
         {plans?.map((plan) => (
           <Card key={plan.id}>
             <CardHeader>
@@ -25,11 +26,11 @@ export default async function Upgrade({ params }: { params: { workspaceSlug: str
               <CardDescription>{plan.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside space-y-2">
+              <ul className="list-inside list-disc space-y-2">
                 {plan.features?.map((feature) => <li key={feature}>{feature}</li>)}
               </ul>
               {plan.prices?.map((price) => (
-                <div className="text-4xl font-bold my-4" key={price.id}>
+                <div className="my-4 text-4xl font-bold" key={price.id}>
                   ${price.amount / 100}/{price.interval}
                 </div>
               ))}
@@ -51,12 +52,12 @@ export default async function Upgrade({ params }: { params: { workspaceSlug: str
             <CardDescription>For large teams with custom needs.</CardDescription>
           </CardHeader>
           <CardContent>
-            <ul className="list-disc list-inside space-y-2">
+            <ul className="list-inside list-disc space-y-2">
               <li>Custom Features</li>
               <li>Custom Support</li>
               <li>Estimate on request</li>
             </ul>
-            <div className="text-4xl font-bold my-4">Contact Us</div>
+            <div className="my-4 text-4xl font-bold">Contact Us</div>
             <Button className="w-full" asChild>
               <Link href="mailto:igor@katsuba.dev">Get in Touch</Link>
             </Button>

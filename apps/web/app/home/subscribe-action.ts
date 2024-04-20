@@ -1,7 +1,8 @@
 'use server';
 
-import { resend } from '@saasfy/resend/server';
 import * as process from 'node:process';
+
+import { resend } from '@saasfy/resend/server';
 
 export async function subscribeAction(formData: FormData) {
   const email = formData.get('email') as string;

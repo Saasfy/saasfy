@@ -1,6 +1,8 @@
-import { CreateWorkspaceUserSchema } from './schemas';
 import { z } from 'zod';
+
 import { createAdminClient } from '@saasfy/supabase/server';
+
+import { CreateWorkspaceUserSchema } from './schemas';
 
 export async function createWorkspaceUser(data: z.infer<typeof CreateWorkspaceUserSchema>) {
   const supabase = createAdminClient();

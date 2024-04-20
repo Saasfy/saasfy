@@ -1,6 +1,8 @@
-import { UpdateWorkspaceUserSchema } from './schemas';
 import { z } from 'zod';
+
 import { createAdminClient } from '@saasfy/supabase/server';
+
+import { UpdateWorkspaceUserSchema } from './schemas';
 
 export async function updateWorkspaceUser(
   id: string,

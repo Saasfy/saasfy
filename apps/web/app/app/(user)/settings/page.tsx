@@ -1,3 +1,6 @@
+import { revalidatePath } from 'next/cache';
+
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
 import {
   Card,
@@ -8,8 +11,6 @@ import {
   CardTitle,
 } from '@saasfy/ui/card';
 import { Input } from '@saasfy/ui/input';
-import { createAdminClient, getUser } from '@saasfy/supabase/server';
-import { revalidatePath } from 'next/cache';
 
 async function updateName(formData: FormData) {
   'use server';

@@ -1,5 +1,7 @@
 import type { User } from '@supabase/supabase-js';
+
 import { Tables } from '@saasfy/supabase';
+
 import { withWorkspaceUser } from './with-workspace-user';
 
 export function withWorkspaceOwner<T>(

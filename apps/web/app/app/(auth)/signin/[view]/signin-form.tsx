@@ -1,13 +1,15 @@
 'use client';
 
-import { useToast } from '@saasfy/ui/use-toast';
-import { createClient } from '@saasfy/supabase';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
-import { Button } from '@saasfy/ui/button';
-import { forgotPassword, login, signup } from './signin-actions';
 import Link from 'next/link';
-import { Label } from '@saasfy/ui/label';
+
+import { createClient } from '@saasfy/supabase';
+import { Button } from '@saasfy/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
 import { Input } from '@saasfy/ui/input';
+import { Label } from '@saasfy/ui/label';
+import { useToast } from '@saasfy/ui/use-toast';
+
+import { forgotPassword, login, signup } from './signin-actions';
 
 export type SignInViews = 'signin' | 'signup' | 'forgot-password';
 
@@ -18,7 +20,7 @@ export function SignInForm({ view }: { view: SignInViews }) {
 
   return (
     <form>
-      <Card className="sm:min-w-[30rem] min-w-full">
+      <Card className="min-w-full sm:min-w-[30rem]">
         <CardHeader>
           <CardTitle className="text-2xl">
             {
@@ -94,7 +96,7 @@ export function SignInForm({ view }: { view: SignInViews }) {
                     });
                   }}
                 >
-                  <GoogleIcon className="w-6 h-6 mr-2" />
+                  <GoogleIcon className="mr-2 h-6 w-6" />
                   Google
                 </Button>
 
@@ -111,14 +113,14 @@ export function SignInForm({ view }: { view: SignInViews }) {
                     });
                   }}
                 >
-                  <GithubIcon className="w-6 h-6 mr-2" />
+                  <GithubIcon className="mr-2 h-6 w-6" />
                   Github
                 </Button>
               </div>
             </>
           ) : null}
 
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col items-center justify-center">
             {
               {
                 signin: (

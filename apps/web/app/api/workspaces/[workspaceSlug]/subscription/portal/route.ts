@@ -1,5 +1,5 @@
-import { stripe } from '@saasfy/stripe/server';
 import { getUrl, withWorkspaceOwner } from '@saasfy/api/server';
+import { stripe } from '@saasfy/stripe/server';
 
 export const GET = withWorkspaceOwner(async ({ req, workspace, params }) => {
   const session = await stripe.billingPortal.sessions.create({

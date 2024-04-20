@@ -1,8 +1,9 @@
 'use client';
 
-import { Slot } from '@radix-ui/react-slot';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+
+import { Slot } from '@radix-ui/react-slot';
 
 export function DeletePlanButton({ id, children }: { id: string; children: React.ReactNode }) {
   const router = useRouter();

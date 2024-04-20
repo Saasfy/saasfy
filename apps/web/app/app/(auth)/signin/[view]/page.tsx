@@ -1,6 +1,8 @@
-import { SignInForm, type SignInViews } from './signin-form';
-import { getUser } from '@saasfy/supabase/server';
 import { redirect } from 'next/navigation';
+
+import { getUser } from '@saasfy/supabase/server';
+
+import { SignInForm, type SignInViews } from './signin-form';
 
 const views: SignInViews[] = ['signin', 'signup', 'forgot-password'];
 
@@ -18,7 +20,7 @@ export default async function SignInViews({ params }: { params: { view: SignInVi
   }
 
   return (
-    <div className="flex justify-center min-h-screen items-center">
+    <div className="flex min-h-screen items-center justify-center">
       <SignInForm view={view} />
     </div>
   );

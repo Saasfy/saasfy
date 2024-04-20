@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { PackageIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+
+import { PackageIcon } from 'lucide-react';
 
 export default function DashboardNav() {
   const path = usePathname();

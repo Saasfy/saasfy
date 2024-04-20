@@ -1,7 +1,9 @@
-import { type CookieOptions, createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
-import { Database } from './db-types';
 import { NextResponse } from 'next/server';
+
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
+
+import { Database } from './db-types';
 
 // Define a function to create a Supabase client for server-side operations
 // The function takes a cookie store created with next/headers cookies as an argument

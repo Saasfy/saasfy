@@ -1,15 +1,17 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
-import { Button } from '@saasfy/ui/button';
 import Link from 'next/link';
-import { Label } from '@saasfy/ui/label';
+
+import { Button } from '@saasfy/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@saasfy/ui/card';
 import { Input } from '@saasfy/ui/input';
+import { Label } from '@saasfy/ui/label';
+
 import { GithubIcon, GoogleIcon } from '../../app/(auth)/signin/[view]/signin-form';
 
 export function SignInMock() {
   return (
-    <div className="flex justify-center min-h-[720px] items-center">
+    <div className="flex min-h-[720px] items-center justify-center">
       <form>
-        <Card className="sm:min-w-[30rem] min-w-full">
+        <Card className="min-w-full sm:min-w-[30rem]">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
             <CardDescription>Enter your email below to login to your account.</CardDescription>
@@ -35,17 +37,17 @@ export function SignInMock() {
 
             <div className="flex gap-2">
               <Button className="w-full" variant="outline" type="button">
-                <GoogleIcon className="w-6 h-6 mr-2" />
+                <GoogleIcon className="mr-2 h-6 w-6" />
                 Google
               </Button>
 
               <Button className="w-full" variant="outline" type="button">
-                <GithubIcon className="w-6 h-6 mr-2" />
+                <GithubIcon className="mr-2 h-6 w-6" />
                 Github
               </Button>
             </div>
 
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center justify-center">
               <Button variant="link" asChild>
                 <Link className="text-sm text-blue-500" href="#">
                   Forgot password?

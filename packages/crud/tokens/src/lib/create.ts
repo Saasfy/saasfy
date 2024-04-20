@@ -1,8 +1,10 @@
-import { CreateTokenSchema } from './schemas';
+import { nanoid } from 'nanoid';
 import { z } from 'zod';
+
 import { createAdminClient } from '@saasfy/supabase/server';
 import { hashToken, maskToken } from '@saasfy/utils/server';
-import { nanoid } from 'nanoid';
+
+import { CreateTokenSchema } from './schemas';
 
 export async function createToken(userId: string, data: z.infer<typeof CreateTokenSchema>) {
   const supabase = createAdminClient();
