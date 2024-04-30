@@ -1,14 +1,22 @@
 import React, { ReactNode, Suspense } from 'react';
+import { headers } from 'next/headers';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import { CloudyIcon, SearchIcon, UserCircleIcon } from 'lucide-react';
 
 import { AccountMenu, ThemeModeToggle, WorkspaceCombobox } from '@saasfy/components';
-import { createAdminClient } from '@saasfy/supabase/server';
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
 import { Input } from '@saasfy/ui/input';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
+  const user = await getUser();
+
+  if (!user) {
+    return redirect(`/signin/signin`);
+  }
+
   const supabase = createAdminClient();
 
   const { data: workspaces } = await supabase.from('workspaces').select('*');

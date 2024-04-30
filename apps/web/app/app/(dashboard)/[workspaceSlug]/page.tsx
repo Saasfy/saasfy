@@ -5,17 +5,11 @@ import { redirect } from 'next/navigation';
 import { ArrowUpRightIcon, SettingsIcon } from 'lucide-react';
 
 import { CreateProjectSheet } from '@saasfy/components';
-import { createAdminClient, getUser } from '@saasfy/supabase/server';
+import { createAdminClient } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 
 export default async function Component({ params }: { params: { workspaceSlug: string } }) {
-  const user = await getUser();
-
-  if (!user) {
-    return redirect('/signin');
-  }
-
   const supabase = createAdminClient();
 
   const workspace = (

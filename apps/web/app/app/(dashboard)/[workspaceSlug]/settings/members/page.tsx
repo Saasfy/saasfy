@@ -1,12 +1,18 @@
-import { FilterIcon, PencilIcon, PlusIcon, TrashIcon } from 'lucide-react';
+import { FilterIcon, PlusIcon } from 'lucide-react';
 
-import { Badge } from '@saasfy/ui/badge';
 import { Button } from '@saasfy/ui/button';
-import { Checkbox } from '@saasfy/ui/checkbox';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@saasfy/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -14,7 +20,8 @@ import {
   DropdownMenuTrigger,
 } from '@saasfy/ui/dropdown-menu';
 import { Input } from '@saasfy/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
+
+import { MemberTable } from './member-table';
 
 export default function Component() {
   return (
@@ -51,67 +58,34 @@ export default function Component() {
           </DropdownMenu>
         </div>
         <div className="flex items-center gap-2 mt-2 md:mt-0">
-          <Button size="sm">
-            <PlusIcon className="w-4 h-4 mr-2" />
-            Add Member
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline">
-                Actions
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm">
+                <PlusIcon className="w-4 h-4 mr-2" />
+                Add Member
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <PencilIcon className="w-4 h-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <TrashIcon className="w-4 h-4 mr-2" />
-                Remove
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Invite Member</DialogTitle>
+                <DialogDescription>
+                  Enter the email address of the person you want to invite.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div>
+                  <Input className="col-span-3" id="email" placeholder="Email" type="email" />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button type="submit">Send Invite</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="border rounded-lg overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">
-                <Checkbox id="select-all" />
-              </TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                <Checkbox id="select-1" />
-              </TableCell>
-              <TableCell className="font-medium">Olivia Davis</TableCell>
-              <TableCell>olivia.davis@vercel.com</TableCell>
-              <TableCell>Admin</TableCell>
-              <TableCell>
-                <Badge>Active</Badge>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Checkbox id="select-2" />
-              </TableCell>
-              <TableCell className="font-medium">Michael Johnson</TableCell>
-              <TableCell>michael.johnson@vercel.com</TableCell>
-              <TableCell>Member</TableCell>
-              <TableCell>
-                <Badge variant="destructive">Inactive</Badge>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <MemberTable />
       </div>
     </div>
   );
