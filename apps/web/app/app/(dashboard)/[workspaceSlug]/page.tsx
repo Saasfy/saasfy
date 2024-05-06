@@ -20,9 +20,9 @@ export default async function Component({ params }: { params: { workspaceSlug: s
 
   const { data: workspace } = await supabase
     .from('workspaces')
-    .select('*')
+    .select('*, workspace_users(*)')
     .eq('slug', params.workspaceSlug)
-    .eq('user_id', user.id)
+    .eq('workspace_users.user_id', user.id)
     .single();
 
   if (!workspace) {

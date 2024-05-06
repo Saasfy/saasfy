@@ -18,7 +18,10 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
   const supabase = createAdminClient();
 
-  const { data: workspaces } = await supabase.from('workspaces').select('*').eq('user_id', user.id);
+  const { data: workspaces } = await supabase
+    .from('workspaces')
+    .select('*, workspace_users(*)')
+    .eq('workspace_users.user_id', user.id);
 
   return (
     <div>
