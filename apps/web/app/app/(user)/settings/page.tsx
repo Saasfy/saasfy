@@ -53,7 +53,7 @@ export default async function Settings() {
         </CardHeader>
         <CardContent>
           <form id="nameForm">
-            <Input placeholder="Store Name" name="name" defaultValue={user.user_metadata.name} />
+            <Input name="name" defaultValue={user.user_metadata.name} />
           </form>
         </CardContent>
         <CardFooter className="border-t px-6 py-4">

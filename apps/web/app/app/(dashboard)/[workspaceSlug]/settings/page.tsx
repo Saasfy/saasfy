@@ -19,7 +19,7 @@ export default function Settings() {
         </CardHeader>
         <CardContent>
           <form>
-            <Input placeholder="Store Name" />
+            <Input />
           </form>
         </CardContent>
         <CardFooter className="border-t px-6 py-4">
