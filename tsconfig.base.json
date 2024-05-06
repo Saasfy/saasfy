@@ -25,6 +25,8 @@
       "@saasfy/crud/workspace-users/server": ["packages/crud/workspace-users/src/server.ts"],
       "@saasfy/crud/workspaces": ["packages/crud/workspaces/src/index.ts"],
       "@saasfy/crud/workspaces/server": ["packages/crud/workspaces/src/server.ts"],
+      "@saasfy/invites": ["packages/crud/invites/src/index.ts"],
+      "@saasfy/invites/server": ["packages/crud/invites/src/server.ts"],
       "@saasfy/resend": ["packages/resend/src/index.ts"],
       "@saasfy/resend/server": ["packages/resend/src/server.ts"],
       "@saasfy/stripe": ["packages/stripe/src/index.ts"],

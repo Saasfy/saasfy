@@ -1,12 +1,14 @@
-import { FilterIcon, PencilIcon, PlusIcon, TrashIcon } from 'lucide-react';
+import React from 'react';
+import { redirect } from 'next/navigation';
 
-import { Badge } from '@saasfy/ui/badge';
+import { FilterIcon, PlusIcon } from 'lucide-react';
+import postgres from 'postgres';
+
+import { createAdminClient, Tables } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
-import { Checkbox } from '@saasfy/ui/checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -14,9 +16,39 @@ import {
   DropdownMenuTrigger,
 } from '@saasfy/ui/dropdown-menu';
 import { Input } from '@saasfy/ui/input';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 
-export default function Component() {
+import { AddMemberDialog } from './add-member-dialog';
+import { InviteTable } from './invite-table';
+import { MemberTable } from './member-table';
+
+export default async function Component({ params }: { params: { workspaceSlug: string } }) {
+  const supabase = createAdminClient();
+
+  const { data: workspace } = await supabase
+    .from('workspaces')
+    .select('*')
+    .eq('slug', params.workspaceSlug)
+    .single();
+
+  if (!workspace) {
+    return redirect('/not-found');
+  }
+
+  const sql = postgres(process.env.POSTGRES_URL!);
+
+  const workspaceMembers = await sql<(Tables<'workspace_users'> & { email: string })[]>`
+    SELECT workspace_users.*, users.email
+    FROM public.workspace_users
+           JOIN auth.users on public.workspace_users.user_id = auth.users.id
+    WHERE public.workspace_users.workspace_id = ${workspace.id}
+  `;
+
+  const { data: invites } = await supabase
+    .from('workspace_invites')
+    .select('*')
+    .eq('status', 'pending')
+    .eq('workspace_id', workspace.id);
+
   return (
     <div className="p-4 lg:p-6">
       <div className="mb-6">
@@ -51,67 +83,22 @@ export default function Component() {
           </DropdownMenu>
         </div>
         <div className="flex items-center gap-2 mt-2 md:mt-0">
-          <Button size="sm">
-            <PlusIcon className="w-4 h-4 mr-2" />
-            Add Member
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline">
-                Actions
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <PencilIcon className="w-4 h-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <TrashIcon className="w-4 h-4 mr-2" />
-                Remove
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <AddMemberDialog>
+            <Button size="sm" type="button">
+              <PlusIcon className="w-4 h-4 mr-2" />
+              Add Member
+            </Button>
+          </AddMemberDialog>
         </div>
       </div>
       <div className="border rounded-lg overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">
-                <Checkbox id="select-all" />
-              </TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>
-                <Checkbox id="select-1" />
-              </TableCell>
-              <TableCell className="font-medium">Olivia Davis</TableCell>
-              <TableCell>olivia.davis@vercel.com</TableCell>
-              <TableCell>Admin</TableCell>
-              <TableCell>
-                <Badge>Active</Badge>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Checkbox id="select-2" />
-              </TableCell>
-              <TableCell className="font-medium">Michael Johnson</TableCell>
-              <TableCell>michael.johnson@vercel.com</TableCell>
-              <TableCell>Member</TableCell>
-              <TableCell>
-                <Badge variant="destructive">Inactive</Badge>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <MemberTable members={workspaceMembers} />
+      </div>
+      <div className="mt-4">
+        <h2 className="text-xl font-semibold mb-2">Invitations</h2>
+        <div className="border rounded-lg overflow-hidden">
+          <InviteTable invites={invites} />
+        </div>
       </div>
     </div>
   );
