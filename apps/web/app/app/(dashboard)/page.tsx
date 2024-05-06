@@ -1,19 +1,27 @@
 import React from 'react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import { ArrowUpRightIcon } from 'lucide-react';
 
 import { CreateWorkspaceSheet } from '@saasfy/components';
-import { createAdminClient } from '@saasfy/supabase/server';
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Badge } from '@saasfy/ui/badge';
 import { Button } from '@saasfy/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
 
 export default async function Component() {
+  const user = await getUser();
+
+  if (!user) {
+    return redirect('/login');
+  }
+
   const supabase = createAdminClient();
   const { data: workspaces } = await supabase
     .from('workspaces')
     .select('*, projects(id), domains(id), workspace_users(id), plans(name)')
+    .eq('user_id', user.id)
     .limit(8);
 
   return (

@@ -1,5 +1,4 @@
 import React, { ReactNode, Suspense } from 'react';
-import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -19,7 +18,10 @@ export default async function DashboardLayout({ children }: { children: ReactNod
 
   const supabase = createAdminClient();
 
-  const { data: workspaces } = await supabase.from('workspaces').select('*');
+  const { data: workspaces } = await supabase
+    .from('workspaces')
+    .select('*, workspace_users(*)')
+    .eq('workspace_users.user_id', user.id);
 
   return (
     <div>
