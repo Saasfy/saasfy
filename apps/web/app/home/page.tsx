@@ -220,7 +220,7 @@ export default function Component() {
                     <span>Projects: Create projects inside your workspace.</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Checkbox checked={false} className="mt-1" />
+                    <Checkbox checked className="mt-1" />
                     <span>Members: Invite members to your workspace.</span>
                   </li>
                   <li className="flex items-start gap-2">
