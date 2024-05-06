@@ -13,7 +13,7 @@ import { forgotPassword, login, signup } from './signin-actions';
 
 export type SignInViews = 'signin' | 'signup' | 'forgot-password';
 
-export function SignInForm({ view }: { view: SignInViews }) {
+export function SignInForm({ view, redirect }: { view: SignInViews; redirect?: string }) {
   const { toast } = useToast();
 
   const supabase = createClient();
@@ -108,7 +108,7 @@ export function SignInForm({ view }: { view: SignInViews }) {
                     supabase.auth.signInWithOAuth({
                       provider: 'github',
                       options: {
-                        redirectTo: `${window.location.origin}/auth/callback`,
+                        redirectTo: `${window.location.origin}/auth/callback?redirect=${redirect || '/'}`,
                       },
                     });
                   }}

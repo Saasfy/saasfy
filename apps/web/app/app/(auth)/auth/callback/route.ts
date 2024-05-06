@@ -6,6 +6,7 @@ export async function GET(request: Request) {
   // by the `@supabase/ssr` package. It exchanges an auth code for the user's session.
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get('code');
+  const redirect = requestUrl.searchParams.get('redirect');
 
   if (code) {
     const auth = createAuthClient();
@@ -18,5 +19,5 @@ export async function GET(request: Request) {
   }
 
   // URL to redirect to after sign in process completes
-  return Response.redirect(getUrl(request, '/'));
+  return Response.redirect(getUrl(request, redirect || '/'));
 }
