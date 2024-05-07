@@ -21,7 +21,7 @@ export default async function Component() {
   const { data: workspaces } = await supabase
     .from('workspaces')
     .select('*, projects(id), domains(id), workspace_users(id), plans(name)')
-    .eq('user_id', user.id)
+    .eq('workspace_users.user_id', user.id)
     .limit(8);
 
   return (
