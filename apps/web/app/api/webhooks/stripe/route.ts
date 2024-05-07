@@ -1,4 +1,5 @@
-import { Client } from 'pg';
+import { User } from '@supabase/supabase-js';
+import postgres from 'postgres';
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -81,19 +82,12 @@ async function createSubscription(subscription: Stripe.Subscription) {
     return Response.json({ received: true });
   }
 
-  const client = new Client({
-    connectionString: process.env.POSTGRES_URL,
-  });
+  const sql = postgres(process.env.POSTGRES_URL!);
 
-  await client.connect();
-
-  const { rows } = await client.query(
-    `SELECT *
-     FROM auth.users
-     WHERE email = '${customer.email}' LIMIT 1`,
-  );
-
-  await client.end();
+  const rows = await sql<User[]>`
+    SELECT *
+    FROM auth.users
+    WHERE email = ${customer.email} LIMIT 1`;
 
   const user = rows.at(0)!;
 
