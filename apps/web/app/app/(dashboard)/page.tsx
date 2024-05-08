@@ -20,7 +20,7 @@ export default async function Component() {
   const supabase = createAdminClient();
   const { data: workspaces } = await supabase
     .from('workspaces')
-    .select('*, projects(id), domains(id), workspace_users(id), plans(name)')
+    .select('*, projects(id), domains(id), workspace_users!inner(id), plans(name)')
     .eq('workspace_users.user_id', user.id)
     .limit(8);
 

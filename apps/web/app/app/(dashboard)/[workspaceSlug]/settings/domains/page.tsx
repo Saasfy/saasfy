@@ -1,6 +1,8 @@
+import { redirect } from 'next/navigation';
+
 import { ExternalLinkIcon } from 'lucide-react';
 
-import { createAdminClient } from '@saasfy/supabase/server';
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 import { Badge } from '@saasfy/ui/badge';
 
 import { AddDomainForm } from './add-form';
@@ -8,22 +10,26 @@ import { DomainConfiguration } from './domain-configuration';
 import { RemoveDomainButton } from './remove-domain-button';
 
 export default async function Component({ params }: { params: { workspaceSlug: string } }) {
+  const user = await getUser();
+
+  if (!user) {
+    return redirect('/login');
+  }
+
   const supabase = createAdminClient();
 
   const { data: workspace } = await supabase
     .from('workspaces')
-    .select('*')
+    .select('*, workspace_users!inner(*), domains(*)')
     .eq('slug', params.workspaceSlug)
+    .eq('workspace_users.user_id', user.id)
     .single();
 
   if (!workspace) {
     return null;
   }
 
-  const { data: domains, error } = await supabase
-    .from('domains')
-    .select('*')
-    .eq('workspace_id', workspace.id);
+  const domains = workspace.domains;
 
   return (
     <div className="p-8">

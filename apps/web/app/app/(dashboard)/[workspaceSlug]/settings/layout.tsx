@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
 
-import { createAdminClient } from '@saasfy/supabase/server';
+import { createAdminClient, getUser } from '@saasfy/supabase/server';
 
 import { Nav } from './nav';
 
@@ -12,11 +12,18 @@ export default async function SettingsLayout({
   children: ReactNode;
   params: { workspaceSlug: string };
 }) {
+  const user = await getUser();
+
+  if (!user) {
+    return redirect(`/signin/signin`);
+  }
+
   const supabase = createAdminClient();
 
   const { data: workspace } = await supabase
     .from('workspaces')
-    .select('*')
+    .select('*, workspace_users!inner(*)')
+    .eq('workspace_users.user_id', user.id)
     .eq('slug', params.workspaceSlug)
     .single();
 
