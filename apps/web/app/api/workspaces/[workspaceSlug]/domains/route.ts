@@ -3,14 +3,34 @@ import { createAdminClient } from '@saasfy/supabase/server';
 
 export const POST = withWorkspaceUser(
   ['owner', 'member'] as const,
-  async ({ req, params, workspace }) => {
+  async ({ req, params, workspace: { id: workspaceId } }) => {
     const { name } = await req.json();
 
     const supabase = createAdminClient();
 
+    const { data: workspace } = await supabase
+      .from('workspaces')
+      .select('*, plans(max_domains), domains(id)')
+      .eq('id', workspaceId)
+      .single();
+
+    const maxDomains = workspace?.plans?.max_domains || 1;
+
+    if (workspace?.domains?.length ?? 0 >= maxDomains) {
+      return Response.json(
+        {
+          errors: ['Workspace is full'],
+          domain: null,
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
     const domain = await supabase
       .from('domains')
-      .insert({ slug: name, workspace_id: workspace.id })
+      .insert({ slug: name, workspace_id: workspaceId })
       .select('*')
       .single();
 
