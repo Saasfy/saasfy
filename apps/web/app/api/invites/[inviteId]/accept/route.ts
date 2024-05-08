@@ -36,6 +36,26 @@ export const POST = withUser<{ inviteId: string }>(async ({ req, user, params })
     );
   }
 
+  const { data: workspace } = await supabase
+    .from('workspaces')
+    .select('*, plans(*), workspace_users(id)')
+    .eq('id', invite.workspaces.id)
+    .single();
+
+  const maxUsers = workspace?.plans?.max_users || 0;
+
+  if (workspace?.workspace_users?.length ?? 0 >= maxUsers) {
+    return Response.json(
+      {
+        errors: ['Workspace is full'],
+        workspace: null,
+      },
+      {
+        status: 400,
+      },
+    );
+  }
+
   const { errors, workspaceUser } = await createWorkspaceUser({
     workspace_id: invite.workspaces.id,
     user_id: user.id,
