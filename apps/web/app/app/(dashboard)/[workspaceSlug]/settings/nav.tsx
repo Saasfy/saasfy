@@ -26,6 +26,13 @@ export function Nav({ workspace }: { workspace: Tables<'workspaces'> }) {
       >
         Members
       </Link>
+      {/*domains*/}
+      <Link
+        href={`/${workspace.slug}/settings/domains`}
+        className={cn(path === `/${workspace.slug}/settings/domains` ? 'text-foreground' : '')}
+      >
+        Domains
+      </Link>
       <Link
         href={`/${workspace.slug}/settings/notifications`}
         className={cn(

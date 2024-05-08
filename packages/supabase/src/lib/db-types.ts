@@ -31,6 +31,7 @@ export type Database = {
       domains: {
         Row: {
           archived: boolean;
+          configured: boolean;
           created_at: string;
           id: string;
           last_checked: string;
@@ -42,6 +43,7 @@ export type Database = {
         };
         Insert: {
           archived?: boolean;
+          configured?: boolean;
           created_at?: string;
           id?: string;
           last_checked?: string;
@@ -53,6 +55,7 @@ export type Database = {
         };
         Update: {
           archived?: boolean;
+          configured?: boolean;
           created_at?: string;
           id?: string;
           last_checked?: string;
