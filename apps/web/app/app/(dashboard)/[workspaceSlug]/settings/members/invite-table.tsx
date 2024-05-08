@@ -1,8 +1,7 @@
-import { TrashIcon } from 'lucide-react';
-
 import { Tables } from '@saasfy/supabase';
-import { Button } from '@saasfy/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@saasfy/ui/table';
+
+import { RemoveInviteButton } from './remove-invite-button';
 
 export function InviteTable({ invites }: { invites: Tables<'workspace_invites'>[] | null }) {
   if (!invites?.length) {
@@ -28,9 +27,7 @@ export function InviteTable({ invites }: { invites: Tables<'workspace_invites'>[
             <TableCell>{invite.role}</TableCell>
             <TableCell>{invite.expires}</TableCell>
             <TableCell>
-              <Button variant="destructive" size="icon">
-                <TrashIcon className="w-4 h-4" />
-              </Button>
+              <RemoveInviteButton inviteId={invite.id} />
             </TableCell>
           </TableRow>
         ))}
