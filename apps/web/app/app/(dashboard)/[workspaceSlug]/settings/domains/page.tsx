@@ -49,7 +49,7 @@ export default async function Component({ params }: { params: { workspaceSlug: s
             >
               <div className="flex justify-between space-x-4">
                 <a
-                  href={`http://${domain}`}
+                  href={`https://${domain.slug}`}
                   target="_blank"
                   rel="noreferrer"
                   className="text-xl text-left font-semibold flex items-center"
