@@ -46,7 +46,7 @@ export async function createProject(formData: FormData) {
 
     const { data: workspace } = await supabase
       .from('workspaces')
-      .select('*, workspace_users!inner(*)')
+      .select('*, workspace_users!inner(*), projects(id), plans(max_projects)')
       .eq('slug', workspaceSlug)
       .eq('workspace_users.user_id', user.id)
       .single();
@@ -54,6 +54,14 @@ export async function createProject(formData: FormData) {
     if (!workspace) {
       return {
         errors: ['You do not have permission to access this source'],
+      };
+    }
+
+    const maxProjects = workspace?.plans?.max_projects || 1;
+
+    if (workspace?.projects?.length ?? 0 >= maxProjects) {
+      return {
+        errors: ['Workspace is full'],
       };
     }
 
