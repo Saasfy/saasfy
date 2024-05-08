@@ -1,0 +1,17 @@
+{
+  "name": "emails",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/emails/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project emails --web",
+  "targets": {
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx -y email dev --port 3003 --dir src/lib",
+        "cwd": "packages/emails"
+      }
+    }
+  }
+}
