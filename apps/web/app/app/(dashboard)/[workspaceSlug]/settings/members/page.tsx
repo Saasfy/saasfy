@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { FilterIcon, PlusIcon } from 'lucide-react';
 import postgres from 'postgres';
 
-import { createAdminClient, Tables } from '@saasfy/supabase/server';
+import { createAdminClient, getUser, Tables } from '@saasfy/supabase/server';
 import { Button } from '@saasfy/ui/button';
 import {
   DropdownMenu,
@@ -22,12 +22,19 @@ import { InviteTable } from './invite-table';
 import { MemberTable } from './member-table';
 
 export default async function Component({ params }: { params: { workspaceSlug: string } }) {
+  const user = await getUser();
+
+  if (!user) {
+    return redirect('/login');
+  }
+
   const supabase = createAdminClient();
 
   const { data: workspace } = await supabase
     .from('workspaces')
-    .select('*')
+    .select('*, workspace_users!inner(*)')
     .eq('slug', params.workspaceSlug)
+    .eq('workspace_users.user_id', user.id)
     .single();
 
   if (!workspace) {

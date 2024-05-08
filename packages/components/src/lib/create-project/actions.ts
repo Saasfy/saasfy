@@ -46,7 +46,7 @@ export async function createProject(formData: FormData) {
 
     const { data: workspace } = await supabase
       .from('workspaces')
-      .select('*, workspace_users(*)')
+      .select('*, workspace_users!inner(*)')
       .eq('slug', workspaceSlug)
       .eq('workspace_users.user_id', user.id)
       .single();
