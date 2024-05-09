@@ -15,6 +15,23 @@
       "to": "#ffffff"
     }
   },
+  "anchors": [
+    {
+      "name": "Demo Landing Page",
+      "url": "https://saasfy.dev",
+      "icon": "house"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/SaaSfy/saasfy"
+    },
+    {
+      "name": "Support us",
+      "icon": "heart",
+      "url": "https://github.com/sponsors/Saasfy"
+    }
+  ],
   "topbarLinks": [
     {
       "name": "Support",
@@ -22,7 +39,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Go to App",
+    "name": "Demo",
     "url": "https://app.saasfy.dev"
   },
   "tabs": [
@@ -34,7 +51,11 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "Development",
+      "pages": ["development/development", "development/deployment"]
     },
     {
       "group": "API Documentation",
@@ -51,6 +72,6 @@
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/katsuba_igor",
-    "github": "https://github.com/IKastuba"
+    "github": "https://github.com/SaaSfy/saasfy"
   }
 }
