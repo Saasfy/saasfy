@@ -39,8 +39,8 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Demo",
-    "url": "https://app.saasfy.dev"
+    "type": "github",
+    "url": "https://github.com/Saasfy/saasfy"
   },
   "tabs": [
     {
